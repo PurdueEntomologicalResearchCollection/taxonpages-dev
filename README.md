@@ -1,7 +1,9 @@
 # This Fork of [TaxonPages](https://github.com/SpeciesFileGroup/taxonpages)
 
 Is intended to be deployed to the
-[Purdue Entomological Research Collection (PERC) website](https://ag.purdue.edu/department/entm/perc/). It is deployed to GitHub Pages, following [these instructions](https://github.com/SpeciesFileGroup/taxonpages).
+[Purdue Entomological Research Collection (PERC) website](https://ag.purdue.edu/department/entm/perc/).
+
+It is built using to GitHub Actions, following [these instructions](https://github.com/SpeciesFileGroup/taxonpages).
 
 ---
 
