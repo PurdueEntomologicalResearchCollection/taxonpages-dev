@@ -75,7 +75,7 @@ export default class TaxonWorks {
     // return makeAPIRequest.get(`/collection_objects?otu_id[]=${otuId}/dwc.json`, opt)
   }
 
-  static getInventoryDarwinCore(otuId, opt) {
+  static getOtuInventoryDarwinCore(otuId, opt) {
     return makeAPIRequest.get(`/otus/${otuId}/inventory/dwc.json`, opt)
   }
 

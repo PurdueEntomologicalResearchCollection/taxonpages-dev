@@ -2,45 +2,22 @@
   <VCard>
     <ClientOnly>
       <VSpinner
-          v-if="isLoading.collectionObjects || isLoading.inventory"
+          v-if="isLoading"
           logo-class="w-8 h-8"
           legend=""
       />
     </ClientOnly>
     <VCardHeader class="flex justify-between">
       <h2 class="text-md">
-        Inventory
-        <span v-if="Array.isArray(inventory)"> [{{inventory.length}}]</span>
+        In the Collection
+        <span v-if="Array.isArray(inventoryDWC)"> [{{ inventoryDWC.length }}]</span>
       </h2>
       <PanelDropdown panel-key="panel:inventory" />
     </VCardHeader>
     <VCardContent class="text-sm">
-      <details class="pb-4">
-        <summary class="cursor-pointer">
-          Collection Objects
-          <span v-if="Array.isArray(collectionObjects)"> [{{collectionObjects.length}}]</span>
-        </summary>
-        <p v-if="typeof collectionObjects === 'string'" v-html="collectionObjects"/>
-        <ul v-else  class="tree ml-2">
-          <li v-for="collectionObject in collectionObjects" :key="collectionObject?.id">
-            <details>
-              <summary class="cursor-pointer">
-                {{ collectionObject.id }} — length {{JSON.stringify(collectionObject).length}}
-              </summary>
-              <ul class="m-2 ml-6 list-disc">
-                <li v-for="entry in Object.entries(collectionObject)" :key="entry[0]">
-                  <em>{{ entry[0] }}:</em> {{ entry[1] }}
-                </li>
-              </ul>
-              <p v-html="JSON.stringify(collectionObject, null, 1)"/>
-            </details>
-          </li>
-        </ul>
-      </details>
-      <h3>Inventory</h3>
-      <p v-if="typeof inventory === 'string'" v-html="inventory"/>
+      <p v-if="typeof inventoryDWC === 'string'" v-html="inventoryDWC"/>
       <ul v-else class="tree ml-2">
-        <li v-for="inventoryItem in inventory" :key="inventoryItem.id" class="mt-1">
+        <li v-for="inventoryItem in inventoryDWC" :key="inventoryItem.id" class="mt-1">
           <details>
             <summary class="cursor-pointer">
               {{ makeInventoryLabel(inventoryItem) }}
@@ -79,9 +56,8 @@ const props = defineProps({
   }
 })
 
-const collectionObjects = ref("Loading...")
-const inventory = ref("Loading...")
-const isLoading = ref({collectionObjects: false, inventory: false})
+const inventoryDWC = ref("Loading...")
+const isLoading = ref(false)
 
 /** Based on taxonpages-orthoptera PanelSpecimentRecords. */
 function makeInventoryLabel(item) {
@@ -133,41 +109,18 @@ watch(
     () => props.otuId,
     async () => {
       if (!props.otuId) {
-        collectionObjects.value = 'No OTU specified.'
-        inventory.value = 'No OTU specified.'
+        inventoryDWC.value = 'No OTU specified.'
         return
       }
 
-      isLoading.value = {...isLoading.value, collectionObjects: true}
+      isLoading.value = true
       useOtuPageRequest('panel:inventory', () =>
-        TaxonWorks.getCollectionObjects(props.otuId)
+        TaxonWorks.getOtuInventoryDarwinCore(props.otuId)
       ).then(({data}) => {
-        collectionObjects.value = data
-        console.log('CollectionObjects', data)
+        inventoryDWC.value = data
       }).catch(
-          e => collectionObjects.value = `Error: ${e}`
-      ).finally(() => isLoading.value = {...isLoading.value, collectionObjects: false})
-    },
-    {immediate: true}
-  )
-
-watch(
-    () => props.otuId,
-    async () => {
-      if (!props.otuId) {
-        inventory.value = 'No OTU specified.'
-        return
-      }
-
-      isLoading.value = {...isLoading.value, inventory: true}
-      useOtuPageRequest('panel:inventory', () =>
-        TaxonWorks.getInventoryDarwinCore(props.otuId)
-      ).then(({data}) => {
-        inventory.value = data
-        console.log('Inventory (Darwin Core)', data)
-      }).catch(
-          e => inventory.value = `Error: ${e}`
-      ).finally(() => isLoading.value = {...isLoading.value, inventory: false})
+          e => inventoryDWC.value = `Error: ${e}`
+      ).finally(() => isLoading.value = false)
     },
     {immediate: true}
   )
