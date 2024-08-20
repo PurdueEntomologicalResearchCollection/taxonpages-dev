@@ -12,7 +12,7 @@
         In the Collection
         <span v-if="Array.isArray(inventoryDWC)"> [{{ inventoryDWC.length }}]</span>
       </h2>
-      <PanelDropdown panel-key="panel:inventory" />
+      <PanelDropdown panel-key="panel:specimens" />
     </VCardHeader>
     <VCardContent class="text-sm">
       <p v-if="typeof inventoryDWC === 'string'" v-html="inventoryDWC"/>
@@ -114,7 +114,7 @@ watch(
       }
 
       isLoading.value = true
-      useOtuPageRequest('panel:inventory', () =>
+      useOtuPageRequest('panel:specimens', () =>
         TaxonWorks.getOtuInventoryDarwinCore(props.otuId)
       ).then(({data}) => {
         inventoryDWC.value = data
