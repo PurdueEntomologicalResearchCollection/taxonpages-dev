@@ -19,17 +19,27 @@ Our standard practice is to work on two branches
 Initial setup:
 
 1. Clone the production repo
-   1. `git clone git@github.com:PurdueEntomologicalResearchCollection/taxonpages.git`
-   2. `cd taxonpages`
+   1. `git clone git@github.com:PurdueEntomologicalResearchCollection/taxonpages.git perc-taxonpages`
+   2. `cd perc-taxonpages`
 2. Fetch from the `dev` repo into a local `dev` branch.
    1. `git remote add dev git@github.com:PurdueEntomologicalResearchCollection/taxonpages-dev.git`
-   2. `git pull remote main:dev`
+   2. `git fetch dev`
+   2. `git checkout -b dev dev/main`
 
 Making changes: 
 1. Push changes to `dev` (they will deploy automatically)
-   1. TODO add details
-2. Merge up to `prod` (they will deploy automatically)
-    1. TODO add details
+   1. Make & test changes locally on a `dev` branch
+      1. Start a branch: `git checkout -b my-dev-branch dev/main`
+      2. Make your changes and commit them to that branch
+   2. Push your changes back to the `dev` repo: `git push dev/main`.
+      * They will deploy to https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/
+2. QA your changes
+      * Ask one of the PERC owners to check them, if appropriate. 
+3. Merge your changes into `prod` from the `dev` branch you were working on:
+   1. `git checkout main`
+   2. `git pull`
+   3. `git merge my-dev-branch`
+   4. `git push`
 
 # TaxonPages
 
