@@ -31,7 +31,7 @@ Making changes:
    1. Make & test changes locally on a `dev` branch
       1. Start a branch: `git checkout -b my-dev-branch dev/main`
       2. Make your changes and commit them to that branch
-   2. Push your changes back to the `dev` repo: `git push dev/main`.
+   2. Push your changes back to the `dev` repo: `git push dev dev:main`.
       * They will deploy to https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/
 2. QA your changes
       * Ask one of the PERC owners to check them, if appropriate. 
