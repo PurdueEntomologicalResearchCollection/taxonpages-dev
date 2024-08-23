@@ -1,3 +1,46 @@
+# Purdue
+
+This is a fork by of [TaxonPages(https://github.com/speciesFileGroup/taxonpages)
+to search the [Purdue Entomological Research Collection](https://ag.purdue.edu/department/entm/perc/) (PERC).
+
+## Developing
+
+There are two repos, which each have their own set of Github Pages for deployment automation:
+* Production — [taxonpages](https://github.com/PurdueEntomologicalResearchCollection/taxonpages) — [published here](https://purdueentomologicalresearchcollection.github.io/taxonpages/)
+* Development — [taxonpages-dev](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-dev) — [published here](https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/)]
+
+Why two repos? Because each [can only have one set of Github Pages](https://github.com/orgs/community/discussions/21582)
+— and we want a way to deploy a development branch for QA.
+
+Our standard practice is to work on two branches
+* `main` — connected to the `prod` repo's `main` branch, and deployed to the PERC search page.
+* `dev` — connected to the `dev` repo's `main` branch (and the `prod` repo's `dev` branch). Deployed to the PERC test search page.
+
+Initial setup:
+
+1. Clone the production repo
+   1. `git clone git@github.com:PurdueEntomologicalResearchCollection/taxonpages.git perc-taxonpages`
+   2. `cd perc-taxonpages`
+2. Fetch from the `dev` repo into a local `dev` branch.
+   1. `git remote add dev git@github.com:PurdueEntomologicalResearchCollection/taxonpages-dev.git`
+   2. `git fetch dev`
+   2. `git checkout -b dev dev/main`
+
+Making changes: 
+1. Push changes to `dev` (they will deploy automatically)
+   1. Make & test changes locally on a `dev` branch
+      1. Start a branch: `git checkout -b my-dev-branch dev/main`
+      2. Make your changes and commit them to that branch
+   2. Push your changes back to the `dev` repo: `git push dev/main`.
+      * They will deploy to https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/
+2. QA your changes
+      * Ask one of the PERC owners to check them, if appropriate. 
+3. Merge your changes into `prod` from the `dev` branch you were working on:
+   1. `git checkout main`
+   2. `git pull`
+   3. `git merge my-dev-branch`
+   4. `git push`
+
 # TaxonPages
 
 TaxonPages is a tool to serve taxon pages. At present it draws data from TaxonWorks' API, however we seek to keep the TaxonPages platform agnostic therefor facilitating the modular addition of functionality that may reference data from any biodiversity data-serving API.
