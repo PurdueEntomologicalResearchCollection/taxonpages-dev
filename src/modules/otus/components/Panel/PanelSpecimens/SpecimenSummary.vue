@@ -42,6 +42,11 @@ For further reference see https://dwc.tdwg.org/terms/.
 // Possible solution: Find the most-specific OTU for the DarwinCore item, and use it to fetch images.
 // Possible solution: Fetch images based on collection item instead of OTU.
 
+// Also where I was: taxonpages-dev isn't loading because it needs a different base_url in router.yml.
+// Solution: Have different versions of router.yml in setup branch of dev & main repos — problem: need to document the difference; maybe okay
+// Solution: Move dev to neolefty.github.io — problem is that it's not an official repo
+// Solution: Modify build process — problem: needs investigation
+
 import Tree from "@/modules/otus/components/Panel/PanelSpecimens/Tree.vue"
 import PanelGallery from "@/modules/otus/components/Panel/PanelGallery/PanelGallery.vue"
 
