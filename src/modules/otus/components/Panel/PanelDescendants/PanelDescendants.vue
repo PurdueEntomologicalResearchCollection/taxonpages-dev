@@ -26,7 +26,7 @@
             taxonomy &&
             !taxonomy.nomenclatural_synonyms.length &&
             !taxonomy.descendants.length
-          " >
+          ">
             No descendants of <span v-html="taxonomy.name"/>.
           </p>
         </AnimationOpacity>
