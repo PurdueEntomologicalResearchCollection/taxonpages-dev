@@ -8,7 +8,14 @@ For further reference see https://dwc.tdwg.org/terms/.
     <summary class="cursor-pointer">
       {{ describeSpecimen(specimen) }}
     </summary>
-    <ul class="m-2 ml-6 list-disc">
+    <ul class="tree m-2 ml-6 relative">
+<!--    <ul class="tree m-2 ml-6 list-disc">-->
+      <li v-if="!!specimen.associatedMedia">
+        <PanelGallery :otu-id="otuId"/>
+      </li>
+      <Tree :children="describeDetails(specimen).map(detail => ({label: detail}))">
+        <span v-html="describeDetails(specimen).join(', ')"/>
+      </Tree>
       <li v-for="detail in describeDetails(specimen)" v-html="detail" :key="detail?.id"/>
       <li>
         <details>
@@ -26,9 +33,25 @@ For further reference see https://dwc.tdwg.org/terms/.
 </template>
 
 <script setup>
+
+// Where I was
+// Problem: We want to see photos of inventory items, but the current OTU may be a higher taxon (eg family)
+// than the photos (eg species).
+// For each inventory item, we're fetching the Darwin Core info, which includes an image URL
+// but not thumbnails etc, as returned by getOtuImages() or the OTU ID, which we could use to get images.
+// Possible solution: Find the most-specific OTU for the DarwinCore item, and use it to fetch images.
+// Possible solution: Fetch images based on collection item instead of OTU.
+
+import Tree from "@/modules/otus/components/Panel/PanelSpecimens/Tree.vue"
+import PanelGallery from "@/modules/otus/components/Panel/PanelGallery/PanelGallery.vue"
+
 const props = defineProps({
   specimen: {
     type: Object,  // Darwin Core schema -- see above for references
+    required: true,
+  },
+  otuId: {
+    type: Number,
     required: true,
   }
 })
@@ -39,6 +62,7 @@ function describeSpecimen(specimen) {
     specimen.catalogNumber,
     describeLocation(specimen),
     specimen.year,
+    specimen.associatedMedia && 'photo',
     // `length ${JSON.stringify(item).length}`,
   ].filter(Boolean).join("; ")
 }

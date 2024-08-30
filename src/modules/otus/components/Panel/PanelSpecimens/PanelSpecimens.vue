@@ -18,7 +18,7 @@
       <p v-if="typeof inventoryDWC === 'string'" v-html="inventoryDWC"/>
       <ul v-else class="tree ml-2">
         <li v-for="specimen in inventoryDWC" :key="specimen.id" class="mt-1">
-          <SpecimenSummary :specimen="specimen"/>
+          <SpecimenSummary :specimen="specimen" :otu-id="otuId"/>
         </li>
       </ul>
     </VCardContent>
