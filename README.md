@@ -1,9 +1,38 @@
 # This Fork of [TaxonPages](https://github.com/SpeciesFileGroup/taxonpages)
 
-Is deployed to the
-[Purdue Entomological Research Collection (PERC) website](https://ag.purdue.edu/department/entm/perc/).
+It has two repos, each with its own GitHub Pages site — because a repo [can only have a single GitHub Pages site](https://github.com/orgs/community/discussions/21582):
 
-It is built using to GitHub Actions, following [these instructions](https://github.com/SpeciesFileGroup/taxonpages).
+* Production: [PERC TaxonPages](https://PurdueEntomologicalResearchCollection.github.io/taxonpages/)
+    * Deployed to the https://ag.purdue.edu/department/entm/perc/search-collection.html
+* Dev / Preview: [PERC Dev TaxonPages](https://PurdueEntomologicalResearchCollection.github.io/taxonpages-dev/)
+    * Deployed to the https://ag.purdue.edu/department/agit/test/perc/
+
+There is one divergence between the two: in the `setup` branch, in `router.yml`:`base_url` is set to
+* `/taxonpages-dev/` in the `dev` repo, and
+* `/taxonpages/` in the `production` repo.
+
+Each is built using to GitHub Actions, following [these instructions](https://github.com/SpeciesFileGroup/taxonpages).
+
+## Local Dev Setup
+
+```bash
+# 1. Clone the production repo
+git clone git@github.com:PurdueEntomologicalResearchCollection/taxonpages.git
+cd taxonpages
+# 2. Add the dev repo as a remote and configure dev branches
+git remote add dev git@github.com:PurdueEntomologicalResearchCollection/taxonpages-dev.git
+git fetch dev
+git branch -u dev/setup dev-setup
+git branch -u dev/main dev-main
+# 3. Run dev-main branch locally
+git checkout dev-main
+git checkout dev-setup .  # Yes, this is a funky thing to do, and you will have to clean up before committing
+npm install
+npm run dev
+# 4. Make changes -- http://localhost:5173/taxonpages-dev/, edit code, and the app will hot-reload  
+# 5. Commit changes
+# TODO: Explain how to clean up after that funky branch setup
+```
 
 ---
 
