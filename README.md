@@ -48,7 +48,7 @@ git checkout setup .
 # 2. Run locally
 npm install
 npm run dev
-# 3. Make changes -- http://localhost:5173/, edit code, and the app will hot-reload
+# 3. Make changes -- http://localhost:5173/taxonpages-dev/, edit code, and the app will hot-reload
 # 4. Commit changes, being careful to not add foreign objects from the `setup` branch
 git add .
 # TODO finish this
