@@ -15,6 +15,8 @@ Each is built using to GitHub Actions, following [these instructions](https://gi
 
 ## Local Dev Setup
 
+Option 1: Work on both the prod and dev sites from a single local repo. 
+
 ```bash
 # 1. Clone the production repo
 git clone git@github.com:PurdueEntomologicalResearchCollection/taxonpages.git
@@ -34,6 +36,24 @@ npm run dev
 # TODO: Explain how to clean up after that funky branch setup
 ```
 
+Option 2: Work only in one of the repos (simpler, but you can't commit changes to the other repo):
+
+```bash:
+# 1. Clone the repo you want to work on -- in this example, it's dev
+git clone git@github.com:PurdueEntomologicalResearchCollection/taxonpages-dev.git
+cd taxonpages-dev
+# 2. Do TaxonPages' funky branch setup
+git checkout main
+git checkout setup .
+# 2. Run locally
+npm install
+npm run dev
+# 3. Make changes -- http://localhost:5173/taxonpages-dev/, edit code, and the app will hot-reload
+# 4. Commit changes, being careful to not add foreign objects from the `setup` branch
+git add .
+# TODO finish this
+git commit -m "Your message here"
+```
 ---
 
 # TaxonPages
