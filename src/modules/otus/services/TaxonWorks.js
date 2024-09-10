@@ -79,6 +79,16 @@ export default class TaxonWorks {
     return makeAPIRequest.get(`/otus/${otuId}/inventory/dwc.json`, opt)
   }
 
+  /** Load image info (thumbnail, etc) from a URL such as one in a Darwin Core 'associatedMedia' field. */
+  static getImageFromUrl(url, opt) {
+    // sanity check that this is the kind of URL we're looking for
+    // if it isn't, the data is likely to not work downstream
+    if (!url.indexOf('/api/v1') < 0)
+      throw new Error('Unsupported URL. Must be a TaxonWorks v1 API URL (containing "/api/v1").')
+    const path = url.split('/api/v1')[1] // remove the base URL -- just keep the part after /api/v1
+    return makeAPIRequest.get(path, opt)
+  }
+
   static getCachedMap(id) {
     return makeAPIRequest.get(`/cached_maps/${id}`)
   }

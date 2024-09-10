@@ -67,7 +67,6 @@ function describeSpecimen(specimen) {
     specimen.catalogNumber,
     describeLocation(specimen),
     specimen.year,
-    specimen.associatedMedia && 'photo',
     // `length ${JSON.stringify(item).length}`,
   ].filter(Boolean).join("; ")
 }

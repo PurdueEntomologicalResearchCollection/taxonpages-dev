@@ -19,6 +19,12 @@
       <ul v-else class="tree ml-2">
         <li v-for="specimen in inventoryDWC" :key="specimen.id" class="mt-1">
           <SpecimenSummary :specimen="specimen" :otu-id="otuId"/>
+          <div v-if="specimen.associatedMedia" class="ml-2 flex flex-row gap-4">
+            <ImageThumbnail
+                v-for="imageUrl in specimen.associatedMedia.split('|')"
+                :imageUrl="imageUrl.trim()"
+            />
+          </div>
         </li>
       </ul>
     </VCardContent>
@@ -31,6 +37,7 @@ import PanelDropdown from '../PanelDropdown.vue'
 import { useOtuPageRequest } from "@/modules/otus/helpers/useOtuPageRequest.js"
 import TaxonWorks from "@/modules/otus/services/TaxonWorks.js"
 import SpecimenSummary from "@/modules/otus/components/Panel/PanelSpecimens/SpecimenSummary.vue"
+import ImageThumbnail from "@/modules/otus/components/Panel/PanelSpecimens/ImageThumbnail.vue"
 
 const props = defineProps({
   otuId: {
