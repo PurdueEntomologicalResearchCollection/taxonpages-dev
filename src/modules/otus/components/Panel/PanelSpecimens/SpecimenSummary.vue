@@ -5,6 +5,7 @@ For further reference see https://dwc.tdwg.org/terms/.
 -->
 <template>
   <!--    <ul class="tree m-2 ml-6 list-disc">-->
+  <div v-html="nameAndAuthor(specimen)"/>
   <ul class="tree m-2 ml-6 relative">
     <li class="my-2">{{ describeSpecimen(specimen) }}</li>
     <li class="my-2">{{describeDetails(specimen).join(', ')}}</li>
@@ -32,7 +33,15 @@ const props = defineProps({
   }
 })
 
-/** Based on taxonpages-orthoptera PanelSpecimenRecords. */
+function genusSpecies(specimen) {
+  return [specimen.genus,  specimen.specificEpithet].filter(Boolean).join(' ')
+}
+
+function nameAndAuthor(specimen) {
+  return [`<em>${genusSpecies(specimen)}</em>`, specimen.scientificNameAuthorship].filter(Boolean).join(' ')
+}
+
+/** Inspired by taxonpages-orthoptera PanelSpecimenRecords. */
 function describeSpecimen(specimen) {
   return [
     specimen.catalogNumber,

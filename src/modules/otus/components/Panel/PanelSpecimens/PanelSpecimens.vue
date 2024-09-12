@@ -18,7 +18,6 @@
       <p v-if="typeof inventoryDWC === 'string'" v-html="inventoryDWC"/>
       <ul v-else class="tree ml-2">
         <li v-for="specimen in inventoryDWC" :key="specimen.id" class="mt-1">
-          <span v-html="nameAndAuthor(specimen)"/>
           <SpecimenSummary :specimen="specimen" :otu-id="otuId"/>
         </li>
       </ul>
@@ -63,13 +62,5 @@ watch(
   },
   {immediate: true}
 )
-
-function genusSpecies(specimen) {
-  return [specimen.genus,  specimen.specificEpithet].filter(Boolean).join(' ')
-}
-
-function nameAndAuthor(specimen) {
-  return [`<em>${genusSpecies(specimen)}</em>`, specimen.scientificNameAuthorship].filter(Boolean).join(' ')
-}
 
 </script>
