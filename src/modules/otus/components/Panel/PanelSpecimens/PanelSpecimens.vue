@@ -18,13 +18,8 @@
       <p v-if="typeof inventoryDWC === 'string'" v-html="inventoryDWC"/>
       <ul v-else class="tree ml-2">
         <li v-for="specimen in inventoryDWC" :key="specimen.id" class="mt-1">
+          <span v-html="nameAndAuthor(specimen)"/>
           <SpecimenSummary :specimen="specimen" :otu-id="otuId"/>
-          <div v-if="specimen.associatedMedia" class="ml-2 flex flex-row gap-4">
-            <ImageThumbnail
-                v-for="imageUrl in specimen.associatedMedia.split('|')"
-                :imageUrl="imageUrl.trim()"
-            />
-          </div>
         </li>
       </ul>
     </VCardContent>
@@ -50,23 +45,31 @@ const inventoryDWC = ref("Loading...")
 const isLoading = ref(false)
 
 watch(
-    () => props.otuId,
-    async () => {
-      if (!props.otuId) {
-        inventoryDWC.value = 'No OTU specified.'
-        return
-      }
+  () => props.otuId,
+  async () => {
+    if (!props.otuId) {
+      inventoryDWC.value = 'No OTU specified.'
+      return
+    }
 
-      isLoading.value = true
-      useOtuPageRequest('panel:specimens', () =>
-        TaxonWorks.getOtuInventoryDarwinCore(props.otuId)
-      ).then(({data}) => {
-        inventoryDWC.value = data
-      }).catch(
-          e => inventoryDWC.value = `Error: ${e}`
-      ).finally(() => isLoading.value = false)
-    },
-    {immediate: true}
-  )
+    isLoading.value = true
+    useOtuPageRequest('panel:specimens', () =>
+      TaxonWorks.getOtuInventoryDarwinCore(props.otuId)
+    ).then(({data}) => {
+      inventoryDWC.value = data
+    }).catch(
+        e => inventoryDWC.value = `Error: ${e}`
+    ).finally(() => isLoading.value = false)
+  },
+  {immediate: true}
+)
+
+function genusSpecies(specimen) {
+  return [specimen.genus,  specimen.specificEpithet].filter(Boolean).join(' ')
+}
+
+function nameAndAuthor(specimen) {
+  return [`<em>${genusSpecies(specimen)}</em>`, specimen.scientificNameAuthorship].filter(Boolean).join(' ')
+}
 
 </script>

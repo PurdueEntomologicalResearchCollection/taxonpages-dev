@@ -1,54 +1,25 @@
 <!--
-A text summary of a Darwin Core representation of a specimen,
-from the TaxonWorks api /otus/<ID>/inventory/dwc.json.
+A summary of & image thumbnails for a Darwin Core representation
+of a specimen, from the TaxonWorks api /otus/<ID>/inventory/dwc.json.
 For further reference see https://dwc.tdwg.org/terms/.
 -->
 <template>
-  <details>
-    <summary class="cursor-pointer">
-      {{ describeSpecimen(specimen) }}
-    </summary>
-    <ul class="tree m-2 ml-6 relative">
-<!--    <ul class="tree m-2 ml-6 list-disc">-->
-      <li v-if="!!specimen.associatedMedia">
-        <PanelGallery :otu-id="otuId"/>
-      </li>
-      <Tree :children="describeDetails(specimen).map(detail => ({label: detail}))">
-        <span v-html="describeDetails(specimen).join(', ')"/>
-      </Tree>
-      <li v-for="detail in describeDetails(specimen)" v-html="detail" :key="detail?.id"/>
-      <li>
-        <details>
-          <summary class="cursor-pointer">Full Record ({{Object.keys(specimen).length}} items)</summary>
-          <dl class="m-2 ml-6">
-            <template v-for="entry in Object.entries(specimen)" :key="entry[0]">
-              <dt>{{ entry[0] }}</dt>
-              <dd class="ml-4 mb-2">{{ entry[1] }}</dd>
-            </template>
-          </dl>
-        </details>
-      </li>
-    </ul>
-  </details>
+  <!--    <ul class="tree m-2 ml-6 list-disc">-->
+  <ul class="tree m-2 ml-6 relative">
+    <li class="my-2">{{ describeSpecimen(specimen) }}</li>
+    <li class="my-2">{{describeDetails(specimen).join(', ')}}</li>
+    <li v-if="specimen.associatedMedia" class="my-2 flex flex-row gap-4">
+      <ImageThumbnail
+          v-for="imageUrl in specimen.associatedMedia.split('|')"
+          :imageUrl="imageUrl.trim()"
+      />
+    </li>
+  </ul>
 </template>
 
 <script setup>
 
-// Where I was
-// Problem: We want to see photos of inventory items, but the current OTU may be a higher taxon (eg family)
-// than the photos (eg species).
-// For each inventory item, we're fetching the Darwin Core info, which includes an image URL
-// but not thumbnails etc, as returned by getOtuImages() or the OTU ID, which we could use to get images.
-// Possible solution: Find the most-specific OTU for the DarwinCore item, and use it to fetch images.
-// Possible solution: Fetch images based on collection item instead of OTU.
-
-// Also where I was: taxonpages-dev isn't loading because it needs a different base_url in router.yml.
-// Solution: Have different versions of router.yml in setup branch of dev & main repos — problem: need to document the difference; maybe okay
-// Solution: Move dev to neolefty.github.io — problem is that it's not an official repo
-// Solution: Modify build process — problem: needs investigation
-
-import Tree from "@/modules/otus/components/Panel/PanelSpecimens/Tree.vue"
-import PanelGallery from "@/modules/otus/components/Panel/PanelGallery/PanelGallery.vue"
+import ImageThumbnail from "@/modules/otus/components/Panel/PanelSpecimens/ImageThumbnail.vue"
 
 const props = defineProps({
   specimen: {
@@ -104,6 +75,6 @@ function describeCollectionDate(specimen) {
 }
 
 function describeGeoreferenceUncertainty(specimen) {
-  return specimen.coordinateUncertaintyInMeters && ` to within ${specimen.coordinateUncertaintyInMeters} meters`
+  return specimen.coordinateUncertaintyInMeters ? ` to within ${specimen.coordinateUncertaintyInMeters} meters` : ""
 }
 </script>
