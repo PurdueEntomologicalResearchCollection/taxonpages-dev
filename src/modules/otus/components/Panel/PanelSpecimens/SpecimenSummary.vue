@@ -9,17 +9,15 @@ For further reference see https://dwc.tdwg.org/terms/.
   <ul class="tree m-2 ml-6 relative">
     <li class="my-2">{{ describeSpecimen(specimen) }}</li>
     <li class="my-2">{{describeDetails(specimen).join(', ')}}</li>
-    <li v-if="specimen.associatedMedia" class="my-2 flex flex-row gap-4">
-      <ImageThumbnail
-          v-for="imageUrl in specimen.associatedMedia.split('|')"
-          :imageUrl="imageUrl.trim()"
-      />
-    </li>
+    <GalleryImage
+        v-if="images.length"
+        :images="images"
+        :only-thumbs="true"
+    />
   </ul>
 </template>
 
 <script setup>
-
 import ImageThumbnail from "@/modules/otus/components/Panel/PanelSpecimens/ImageThumbnail.vue"
 
 const props = defineProps({
@@ -27,10 +25,14 @@ const props = defineProps({
     type: Object,  // Darwin Core schema -- see above for references
     required: true,
   },
+  images: {
+    type: Array,
+    default: [],
+  },
   otuId: {
     type: Number,
     required: true,
-  }
+  },
 })
 
 function genusSpecies(specimen) {
