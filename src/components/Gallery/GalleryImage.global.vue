@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-col">
     <div
+      v-if="!props.onlyThumbs"
       class="flex justify-center border print:hidden bg-base-0 border-base-muted"
     >
       <GalleryMainImage
@@ -14,6 +15,9 @@
       @select-index="
         ($event) => {
           galleryIndex = $event
+          // when only showing thumbs, clicking a thumb opens the viewer
+          if (props.onlyThumbs)
+            isImageViewerOpen = true
         }
       "
     />
@@ -41,6 +45,10 @@ const props = defineProps({
   images: {
     type: Array,
     default: () => []
+  },
+  onlyThumbs: {
+    type: Boolean,
+    default: false
   }
 })
 
