@@ -18,6 +18,8 @@ module.exports = {
     './config/*.yml'
   ],
 
+  important: '#app',
+
   darkMode: 'class',
 
   theme: {
