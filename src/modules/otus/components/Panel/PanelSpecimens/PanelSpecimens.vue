@@ -10,8 +10,28 @@
     <VCardHeader class="flex justify-between">
       <h2 class="text-md">
         In the Collection
-        <!-- Where I was: Pagination links via <router-link> and new refs page, perPage, total -->
-        <span v-if="Array.isArray(inventoryDWC)"> ({{ inventoryDWC.length }})</span>
+        <template v-if="Array.isArray(inventoryDWC)">
+          <span v-if="typeof total === 'number' && total < perPage && page === 1">
+            ({{total}})
+          </span>
+          <span v-else>
+            (<router-link
+                v-if="page > 1"
+                :to="{ name: 'otus-id', params: { id: otuId } }"
+                class="text-primary-500"
+                v-html="'&lt;&lt;'"
+                @click="page--"
+            />
+            {{ (page - 1) * perPage + 1}}–{{(page - 1) * perPage + inventoryDWC.length}} of {{total}}
+            <router-link
+              v-if="inventoryDWC.length === perPage"
+              :to="{ name: 'otus-id', params: { id: otuId } }"
+              class="text-primary-500"
+              v-html="'&gt;&gt;'"
+              @click="page++"
+          />)
+          </span>
+        </template>
       </h2>
       <PanelDropdown panel-key="panel:specimens" />
     </VCardHeader>
@@ -36,7 +56,6 @@ import PanelDropdown from '../PanelDropdown.vue'
 import { useOtuPageRequest } from "@/modules/otus/helpers/useOtuPageRequest.js"
 import TaxonWorks from "@/modules/otus/services/TaxonWorks.js"
 import SpecimenSummary from "@/modules/otus/components/Panel/PanelSpecimens/SpecimenSummary.vue"
-import ImageThumbnail from "@/modules/otus/components/Panel/PanelSpecimens/ImageThumbnail.vue"
 
 const props = defineProps({
   otuId: {
@@ -49,9 +68,9 @@ const inventoryDWC = ref("Loading...")
 const inventoryGallery = ref(undefined)
 const isLoading = ref({dwc: false, gallery: false})
 const page = ref(1)
-const perPage = ref(5)
+const perPage = ref(20)
 // TODO populate once the API has this info
-const total = ref(20)
+const total = ref("???")
 
 const getSpecimenImages = (specimen) => {
   return !inventoryGallery.value ? [] : inventoryGallery.value.filter(
@@ -64,7 +83,7 @@ const getSpecimenImages = (specimen) => {
 }
 
 watch(
-  () => props.otuId,
+  () => [props.otuId , page.value],
   async () => {
     if (!props.otuId) {
       inventoryDWC.value = 'No OTU specified.'
@@ -73,9 +92,16 @@ watch(
 
     isLoading.value = {...isLoading.value, dwc: true}
     useOtuPageRequest('panel:specimens', () =>
-      TaxonWorks.getDescendantsDarwinCore(props.otuId, {per: 5})
+      TaxonWorks.getDescendantsDarwinCore(
+          props.otuId,
+          {per: perPage.value, page: page.value},
+      )
     ).then(({data}) => {
       inventoryDWC.value = data
+      // if we've reached the end, so we know the total
+      if (Array.isArray(data) && data.length < perPage.value) {
+        total.value = (page.value - 1) * perPage.value + data.length
+      }
     }).catch(
         e => inventoryDWC.value = `Error loading Darwin Core: ${e}`
     ).finally(() => isLoading.value = {...isLoading.value, dwc: false})
