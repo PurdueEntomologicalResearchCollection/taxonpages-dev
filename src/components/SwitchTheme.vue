@@ -46,7 +46,7 @@
 import { watch, ref } from 'vue'
 
 const themeModes = {
-  dark: 'dark',
+  dark: 'light', // Purdue Cascade expects only light mode
   light: 'light'
 }
 const themeMode = ref(null)
@@ -57,7 +57,7 @@ if (window !== undefined) {
     (!('theme' in localStorage) &&
       window.matchMedia('(prefers-color-scheme: dark)').matches)
   ) {
-    themeMode.value = 'dark'
+    themeMode.value = 'light' // Purdue Cascade expects only light mode
   } else {
     themeMode.value = 'light'
   }
