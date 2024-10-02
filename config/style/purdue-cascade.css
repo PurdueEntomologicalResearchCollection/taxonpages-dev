@@ -1,0 +1,11 @@
+#main-content #app header:is(.flex) {
+    /* Cascade has its own page header, so hide the TaxonPages header.
+     * Even if we remove the header from the Vue app, a placeholder will be added. */
+    display: none;
+}
+
+#main-content #app .h-screen {
+    /* TaxonPages takes over the screen, but that's not good behavior inside a Cascade page. */
+    height: unset;
+    min-height: 30rem;
+}
