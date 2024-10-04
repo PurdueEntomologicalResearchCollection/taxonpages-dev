@@ -9,3 +9,19 @@
     height: unset;
     min-height: 30rem;
 }
+
+#app {
+    /* Cascade has some opinions about spacing, color, and size that don't work well for TaxonPages. */
+    color: black;
+    h1, h2, h3, h4, h5, h6 {
+        font-family: United Sans, Impact, sans-serif;
+        text-transform: unset;
+        font-size: unset;
+        color: black;
+        margin: unset;
+        line-height: unset;
+    }
+    li, p {
+        font-weight: 400;
+    }
+}
