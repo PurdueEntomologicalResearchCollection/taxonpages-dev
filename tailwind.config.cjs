@@ -25,7 +25,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        main: ['United Sans', 'sans-serif']
+        main: ["acumin-pro", "sans-serif"],
       },
       colors: {
         base: {
