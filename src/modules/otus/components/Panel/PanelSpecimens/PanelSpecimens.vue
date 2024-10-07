@@ -15,21 +15,45 @@
             ({{total}})
           </span>
           <span v-else>
-            (<router-link
-                v-if="page > 1"
-                :to="{ name: 'otus-id', params: { id: otuId } }"
-                class="text-primary-500"
-                v-html="'&lt;&lt;'"
-                @click="page--"
-            />
-            {{ (page - 1) * perPage + 1}}–{{(page - 1) * perPage + inventoryDWC.length}} of {{total}}
-            <router-link
-              v-if="inventoryDWC.length === perPage"
-              :to="{ name: 'otus-id', params: { id: otuId } }"
-              class="text-primary-500"
-              v-html="'&gt;&gt;'"
-              @click="page++"
-          />)
+            {{ void(showFirst = page > 1) }}
+            {{ void(showPrev = page > 1) }}
+            {{ void(showNext = inventoryDWC.length === perPage) }}
+            {{ void(showLast = showNext && typeof total === 'number' && total > (page - 1) * perPage + inventoryDWC.length) }}
+            ({{ (page - 1) * perPage + 1}}–{{(page - 1) * perPage + inventoryDWC.length}} of {{total}})
+            <span v-if="showPrev || showNext" class="ml-2">
+              <router-link
+                  v-if="showFirst"
+                  :to="{ name: 'otus-id', params: { id: otuId } }"
+                  class="text-primary-500 ml-2"
+                  v-html="'<<'"
+                  @click="page = 1"
+              />
+              <span v-if="!showFirst" v-html="'<<'" class="ml-2"/>
+              <router-link
+                  v-if="showPrev"
+                  :to="{ name: 'otus-id', params: { id: otuId } }"
+                  class="text-primary-500 ml-2"
+                  v-html="'prev'"
+                  @click="page--"
+              />
+              <span v-if="!showPrev" class="ml-2">prev</span>
+              <router-link
+                  v-if="showNext"
+                  :to="{ name: 'otus-id', params: { id: otuId } }"
+                  class="text-primary-500 ml-2"
+                  v-html="'next'"
+                  @click="page++"
+              />
+              <span v-if="!showNext" v-html="'next'" class="ml-2"/>
+              <router-link
+                  v-if="showLast"
+                  :to="{ name: 'otus-id', params: { id: otuId } }"
+                  class="text-primary-500 ml-2"
+                  v-html="'>>'"
+                  @click="page = Math.ceil(total / perPage)"
+                />
+              <span v-if="!showLast" v-html="'>>'" class="ml-2"/>
+            </span>
           </span>
         </template>
       </h2>
