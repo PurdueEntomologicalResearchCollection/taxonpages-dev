@@ -9,17 +9,23 @@
     </ClientOnly>
     <VCardHeader class="flex justify-between">
       <h2 class="text-md">
+        {{ (void (isSinglePage = typeof total === 'number' && total < perPage && page === 1)) }}
+        {{ (void (isLoaded = Array.isArray(inventoryDWC))) }}
         In the Collection
-        <template v-if="Array.isArray(inventoryDWC)">
-          <span v-if="typeof total === 'number' && total < perPage && page === 1">
+        <template v-if="isLoaded">
+          <span v-if="isSinglePage">
             ({{total}})
           </span>
           <span v-else>
+            ({{ (page - 1) * perPage + 1}}–{{(page - 1) * perPage + inventoryDWC.length}} of {{total}})
+          </span>
+          </template>
+      </h2>
+      <h3 v-if="isLoaded && !isSinglePage">
             {{ void(showFirst = page > 1) }}
             {{ void(showPrev = page > 1) }}
             {{ void(showNext = inventoryDWC.length === perPage) }}
             {{ void(showLast = showNext && typeof total === 'number' && total > (page - 1) * perPage + inventoryDWC.length) }}
-            ({{ (page - 1) * perPage + 1}}–{{(page - 1) * perPage + inventoryDWC.length}} of {{total}})
             <span v-if="showPrev || showNext" class="ml-2">
               <router-link
                   v-if="showFirst"
@@ -54,9 +60,7 @@
                 />
               <span v-if="!showLast" v-html="'>>'" class="ml-2"/>
             </span>
-          </span>
-        </template>
-      </h2>
+      </h3>
       <PanelDropdown panel-key="panel:specimens" />
     </VCardHeader>
     <VCardContent class="text-sm">
