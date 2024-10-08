@@ -11,21 +11,22 @@
       <h2 class="text-md">
         {{ (void (isSinglePage = typeof total === 'number' && total < perPage && page === 1)) }}
         {{ (void (isLoaded = Array.isArray(inventoryDWC))) }}
+        {{ (void (dwcCount = isLoaded ? inventoryDWC.length : 0)) }}
         In the Collection
         <template v-if="isLoaded">
           <span v-if="isSinglePage">
             ({{total}})
           </span>
           <span v-else>
-            ({{ (page - 1) * perPage + 1}}–{{(page - 1) * perPage + inventoryDWC.length}} of {{total}})
+            ({{ (page - 1) * perPage + 1}}–{{(page - 1) * perPage + dwcCount}} of {{total}})
           </span>
           </template>
       </h2>
       <h3 v-if="isLoaded && !isSinglePage">
             {{ void(showFirst = page > 1) }}
             {{ void(showPrev = page > 1) }}
-            {{ void(showNext = inventoryDWC.length === perPage) }}
-            {{ void(showLast = showNext && typeof total === 'number' && total > (page - 1) * perPage + inventoryDWC.length) }}
+            {{ void(showNext = dwcCount === perPage) }}
+            {{ void(showLast = showNext && typeof total === 'number' && total > (page - 1) * perPage + dwcCount) }}
             <span v-if="showPrev || showNext" class="mx-2">
               <router-link
                   v-if="showFirst"
@@ -97,7 +98,6 @@ const inventoryGallery = ref(undefined)
 const isLoading = ref({dwc: false, gallery: false})
 const page = ref(1)
 const perPage = ref(20)
-// TODO populate once the API has this info
 const total = ref("???")
 
 const getSpecimenImages = (specimen) => {
@@ -124,12 +124,10 @@ watch(
           props.otuId,
           {per: perPage.value, page: page.value},
       )
-    ).then(({data}) => {
+    ).then(({data, headers}) => {
+      console.log({panel: "specimens", headers, data})
       inventoryDWC.value = data
-      // if we've reached the end, so we know the total
-      if (Array.isArray(data) && data.length < perPage.value) {
-        total.value = (page.value - 1) * perPage.value + data.length
-      }
+      total.value = Number(headers['pagination-total'])
     }).catch(
         e => inventoryDWC.value = `Error loading Darwin Core: ${e}`
     ).finally(() => isLoading.value = {...isLoading.value, dwc: false})
@@ -137,7 +135,8 @@ watch(
     isLoading.value = {...isLoading.value, gallery: true}
     useOtuPageRequest('panel:gallery', () =>
       TaxonWorks.getDescendantsImageGallery(props.otuId)
-    ).then(({data}) => {
+    ).then(({data, headers}) => {
+      console.log({panel: "gallery", headers, data})
       inventoryGallery.value = data
     }).catch(
         e => console.error(`Error loading gallery: ${e}`)
