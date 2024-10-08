@@ -26,7 +26,7 @@
             {{ void(showPrev = page > 1) }}
             {{ void(showNext = inventoryDWC.length === perPage) }}
             {{ void(showLast = showNext && typeof total === 'number' && total > (page - 1) * perPage + inventoryDWC.length) }}
-            <span v-if="showPrev || showNext" class="ml-2">
+            <span v-if="showPrev || showNext" class="mx-2">
               <router-link
                   v-if="showFirst"
                   :to="{ name: 'otus-id', params: { id: otuId } }"
