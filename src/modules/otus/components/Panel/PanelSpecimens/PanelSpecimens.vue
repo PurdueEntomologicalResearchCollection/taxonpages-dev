@@ -7,7 +7,7 @@
           legend=""
       />
     </ClientOnly>
-    <VCardHeader class="flex justify-between">
+    <VCardHeader class="flex justify-between items-center">
       <h2 class="text-md">
         {{ (void (isSinglePage = typeof total === 'number' && total < perPage && page === 1)) }}
         {{ (void (isLoaded = Array.isArray(inventoryDWC))) }}
@@ -22,7 +22,7 @@
           </span>
           </template>
       </h2>
-      <h3 v-if="isLoaded && !isSinglePage">
+      <p v-if="isLoaded && !isSinglePage">
             {{ void(showFirst = page > 1) }}
             {{ void(showPrev = page > 1) }}
             {{ void(showNext = dwcCount === perPage) }}
@@ -61,7 +61,7 @@
                 />
               <span v-if="!showLast" v-html="'>>'" class="ml-2"/>
             </span>
-      </h3>
+      </p>
       <PanelDropdown panel-key="panel:specimens" />
     </VCardHeader>
     <VCardContent class="text-sm">
