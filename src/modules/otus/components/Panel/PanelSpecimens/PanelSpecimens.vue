@@ -22,45 +22,43 @@
           </span>
           </template>
       </h2>
-      <p v-if="isLoaded && !isSinglePage">
+      <p v-if="isLoaded && !isSinglePage" class="text-sm mx-2">
             {{ void(showFirst = page > 1) }}
             {{ void(showPrev = page > 1) }}
             {{ void(showNext = dwcCount === perPage) }}
             {{ void(showLast = showNext && typeof total === 'number' && total > (page - 1) * perPage + dwcCount) }}
-            <span v-if="showPrev || showNext" class="mx-2">
-              <router-link
-                  v-if="showFirst"
-                  :to="{ name: 'otus-id', params: { id: otuId } }"
-                  class="hover:text-gray-900 text-secondary-color ml-2"
-                  v-html="'<<'"
-                  @click="page = 1"
+            <router-link
+                v-if="showFirst"
+                :to="{ name: 'otus-id', params: { id: otuId } }"
+                class="hover:text-gray-900 text-secondary-color ml-2"
+                v-html="'<<'"
+                @click="page = 1"
+            />
+            <span v-else v-html="'<<'" class="ml-2"/>
+            <router-link
+                v-if="showPrev"
+                :to="{ name: 'otus-id', params: { id: otuId } }"
+                class="hover:text-gray-900 text-secondary-color ml-2"
+                v-html="'prev'"
+                @click="page--"
+            />
+            <span v-else class="ml-2">prev</span>
+            <router-link
+                v-if="showNext"
+                :to="{ name: 'otus-id', params: { id: otuId } }"
+                class="hover:text-gray-900 text-secondary-color ml-2"
+                v-html="'next'"
+                @click="page++"
+            />
+            <span v-else v-html="'next'" class="ml-2"/>
+            <router-link
+                v-if="showLast"
+                :to="{ name: 'otus-id', params: { id: otuId } }"
+                class="hover:text-gray-900 text-secondary-color ml-2"
+                v-html="'>>'"
+                @click="page = Math.ceil(total / perPage)"
               />
-              <span v-if="!showFirst" v-html="'<<'" class="ml-2"/>
-              <router-link
-                  v-if="showPrev"
-                  :to="{ name: 'otus-id', params: { id: otuId } }"
-                  class="hover:text-gray-900 text-secondary-color ml-2"
-                  v-html="'prev'"
-                  @click="page--"
-              />
-              <span v-if="!showPrev" class="ml-2">prev</span>
-              <router-link
-                  v-if="showNext"
-                  :to="{ name: 'otus-id', params: { id: otuId } }"
-                  class="hover:text-gray-900 text-secondary-color ml-2"
-                  v-html="'next'"
-                  @click="page++"
-              />
-              <span v-if="!showNext" v-html="'next'" class="ml-2"/>
-              <router-link
-                  v-if="showLast"
-                  :to="{ name: 'otus-id', params: { id: otuId } }"
-                  class="hover:text-gray-900 text-secondary-color ml-2"
-                  v-html="'>>'"
-                  @click="page = Math.ceil(total / perPage)"
-                />
-              <span v-if="!showLast" v-html="'>>'" class="ml-2"/>
-            </span>
+            <span v-else v-html="'>>'" class="ml-2"/>
       </p>
       <PanelDropdown panel-key="panel:specimens" />
     </VCardHeader>
