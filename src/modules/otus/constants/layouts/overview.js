@@ -4,9 +4,9 @@ export const DEFAULT_OVERVIEW_LAYOUT = {
       [
         [
           'panel:gallery',
+          'panel:specimens',
           'panel:type',
           'panel:type-specimen',
-          'panel:specimens',
           'panel:nomenclature',
           'panel:nomenclature-references'
         ],
