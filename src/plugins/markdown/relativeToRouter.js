@@ -1,3 +1,5 @@
+import { getBaseUrl } from "../../utils/url"
+
 export function relativeToRouterPlugin(md, configuration) {
   const isStaticAsset = (url) => {
     const regex = /\.\w+$/
@@ -5,11 +7,8 @@ export function relativeToRouterPlugin(md, configuration) {
     return regex.test(url)
   }
 
-  const makeUrlToStaticAsset = (url) => {
-    const baseUrl = configuration.base_url || ''
-
-    return (baseUrl + url).replaceAll('//', '/')
-  }
+  const makeUrlToStaticAsset = (url) =>
+    (getBaseUrl(configuration) + url).replaceAll('//', '/')
 
   const scan = (state) => {
     state.tokens.forEach((tokens) => {

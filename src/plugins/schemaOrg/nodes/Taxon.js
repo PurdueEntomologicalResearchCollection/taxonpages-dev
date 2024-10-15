@@ -1,3 +1,5 @@
+import { getBaseUrl } from "@/utils/url"
+
 function removeEmptyProperties(obj) {
   const copyObj = { ...obj }
 
@@ -13,8 +15,8 @@ function removeEmptyProperties(obj) {
 }
 
 function makeUrlPath(host, path) {
-  const { hash_mode, base_url = '' } = __APP_ENV__
-  const fullPath = (base_url + (hash_mode ? '/#' + path : path)).replaceAll(
+  const { hash_mode } = __APP_ENV__
+  const fullPath = (getBaseUrl() + (hash_mode ? '/#' + path : path)).replaceAll(
     '//',
     '/'
   )

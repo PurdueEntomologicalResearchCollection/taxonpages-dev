@@ -6,6 +6,7 @@ import {
 } from 'vue-router'
 
 import dynamicRoutes from '~pages'
+import { getBaseUrl } from "@/utils/url"
 
 const coreModuleRoutes = import.meta.glob('@/modules/**/router/*.js', {
   import: 'default',
@@ -16,7 +17,8 @@ const userModuleRoutes = import.meta.glob('#/modules/**/router/*.js', {
   eager: true
 })
 
-const { base_url, hash_mode } = __APP_ENV__
+const { hash_mode } = __APP_ENV__
+const base_url = getBaseUrl()
 
 const moduleRoutes = [].concat(
   ...Object.values(coreModuleRoutes),
