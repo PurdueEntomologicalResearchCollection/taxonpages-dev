@@ -1,4 +1,4 @@
 ---
-  base_url: /department/agit/test/perc/
-  github_pages_base_url: /taxonpages-dev/
+  base_url: /taxonpages-dev/
+  deployed_base_url: /department/agit/test/perc/
   hash_mode: true
