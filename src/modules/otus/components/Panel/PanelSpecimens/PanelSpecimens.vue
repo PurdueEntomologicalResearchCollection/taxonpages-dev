@@ -123,7 +123,7 @@ watch(
           {per: perPage.value, page: page.value},
       )
     ).then(({data, headers}) => {
-      console.log({panel: "specimens", headers, data})
+      // console.log({panel: "specimens", headers, data})
       inventoryDWC.value = data
       total.value = Number(headers['pagination-total'])
     }).catch(
@@ -134,7 +134,7 @@ watch(
     useOtuPageRequest('panel:gallery', () =>
       TaxonWorks.getDescendantsImageGallery(props.otuId)
     ).then(({data, headers}) => {
-      console.log({panel: "gallery", headers, data})
+      // console.log({panel: "gallery", headers, data})
       inventoryGallery.value = data
     }).catch(
         e => console.error(`Error loading gallery: ${e}`)
