@@ -58,7 +58,7 @@ function describeDetails(specimen) {
     describeCollectionDate(specimen),
     specimen.recordedBy && `Recorded by ${specimen.recordedBy}`,
     describeIdentifiedBy(specimen),
-    specimen.georeferencedBy && `Georeferenced by ${specimen.georeferencedBy}${describeGeoreferenceUncertainty(specimen)}`,
+    specimen.georeferencedBy && `Geolocated by ${specimen.georeferencedBy}${describeGeoreferenceUncertainty(specimen)}`,
     // CollectionObject #1234
     specimen.dwc_occurrence_object_id && `${specimen.dwc_occurrence_object_type} #${specimen.dwc_occurrence_object_id}`,
   ].filter(Boolean)
