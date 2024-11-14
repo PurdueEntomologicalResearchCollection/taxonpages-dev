@@ -48,7 +48,7 @@ git checkout setup .
 # 2. Run locally
 npm install
 npm run dev
-# 3. Make changes -- http://localhost:5173/taxonpages-dev/, edit code, and the app will hot-reload
+# 3. Make changes -- http://localhost:5173/, edit code, and the app will hot-reload
 # 4. Commit changes, being careful to not add foreign objects from the `setup` branch
 git add .
 # TODO finish this
@@ -68,9 +68,10 @@ TaxonPages software is in active development and changes are expected that will 
 
 1. Click on "Fork" button to create your own repository from this.
 2. Uncheck `Copy the setup branch only` and press `Save`
-3. After create your repo, go to `Settings > Pages`, on "Branch" select `gh-pages` and `/(root)`. Then press save
-4. Open `router.yml` file and change `base_url` to the name of your repository.
-5. After a couple of minutes, your public page should be available at `https://<your_user_name>.github.io/<your_repo_name>`
+3. After create your repo, go to `Settings > Pages`, on "Build and deployment - Source" select `GitHub Actions`.
+4. Go to `Actions` tab and press `I understand my workflows, go ahead and enable them` button
+5. Open `router.yml` file and change `base_url` to the name of your repository.
+6. After a couple of minutes, your public page should be available at `https://<your_user_name>.github.io/<your_repo_name>`
 
 ### Setup
 
@@ -249,6 +250,22 @@ taxa_page:
 #   rank_group: ['SpeciesGroup']
 #   panels:
 #     - - - panel:specimen-records
+```
+
+### Lifecycle hooks (Experimental feature)
+
+The `onCreatePage` and `onSSRPageCreate` functions allow you to execute code at the time the taxa page is created. `onSSRPageCreate` will be executed only on the server side in SSR mode. To make use of them it is necessary to include them in a file object called `pages/otus.config.js`. Both functions accept `otu`, `taxon`, `route` and `router` objects as parameters. Since `onCreatePage` runs on Taxa page component, it is possible to use hooks like `onMounted` or `onBeforeMount` inside it
+
+```javascript
+export default {
+  onSSRCreatePage: async ({ otu, taxon, route, router }) => {
+    // Your code here
+  },
+
+  onCreatePage: ({ otu, taxon, route, router }) => {
+    // Your code here
+  }
+}
 ```
 
 ### External panels

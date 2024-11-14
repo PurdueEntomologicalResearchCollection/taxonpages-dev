@@ -1,3 +1,4 @@
 ---
-  base_url: /department/agit/test/perc/
+  base_url: /taxonpages-dev/
+  deployed_base_url: /department/agit/test/perc/
   hash_mode: true
