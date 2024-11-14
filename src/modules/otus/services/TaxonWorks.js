@@ -93,4 +93,8 @@ export default class TaxonWorks {
   static getCachedMap(id) {
     return makeAPIRequest.get(`/cached_maps/${id}`)
   }
+
+  static getKeys(otuId) {
+    return makeAPIRequest.get(`/otus/${otuId}/inventory/keys`)
+  }
 }

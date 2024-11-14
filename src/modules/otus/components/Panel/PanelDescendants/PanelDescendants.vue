@@ -15,11 +15,7 @@
       <ul class="tree ml-2">
         <AnimationOpacity>
           <DescendantsTree
-            v-if="
-              taxonomy &&
-              (taxonomy.nomenclatural_synonyms.length ||
-                taxonomy.descendants.length)
-            "
+            v-if="hasRecords"
             :taxonomy="taxonomy"
           />
           <p v-if="
@@ -31,12 +27,13 @@
           </p>
         </AnimationOpacity>
       </ul>
+      <span v-if="!hasRecords && !isLoading">No records found.</span>
     </VCardContent>
   </VCard>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useOtuPageRequest } from '@/modules/otus/helpers/useOtuPageRequest'
 import DescendantsTree from './DescendantsTree.vue'
 import TaxonWorks from '../../../services/TaxonWorks'
@@ -51,6 +48,13 @@ const props = defineProps({
 
 const taxonomy = ref(null)
 const isLoading = ref(false)
+
+const hasRecords = computed(
+  () =>
+    taxonomy.value &&
+    (taxonomy.value.nomenclatural_synonyms.length ||
+      taxonomy.value.descendants.length)
+)
 
 watch(
   () => props.otuId,
