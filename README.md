@@ -1,17 +1,21 @@
-# This Fork of [TaxonPages](https://github.com/SpeciesFileGroup/taxonpages)
+# Purdue Entomology's [TaxonPages](https://github.com/SpeciesFileGroup/taxonpages)
 
-It has two repos, each with its own GitHub Pages site — because a repo [can only have a single GitHub Pages site](https://github.com/orgs/community/discussions/21582):
+It has four repos, each with its own GitHub Pages site — because a repo [can only have a single GitHub Pages site](https://github.com/orgs/community/discussions/21582):
 
-* Production: [PERC TaxonPages](https://PurdueEntomologicalResearchCollection.github.io/taxonpages/)
-    * Deployed to the https://ag.purdue.edu/department/entm/perc/search-collection.html
-* Dev / Preview: [PERC Dev TaxonPages](https://PurdueEntomologicalResearchCollection.github.io/taxonpages-dev/)
-    * Deployed to the https://ag.purdue.edu/department/agit/test/perc/
+# Production Github Pages: [taxonpages](https://PurdueEntomologicalResearchCollection.github.io/taxonpages/) — auto-deployed to https://purdueentomologicalresearchcollection.github.io/taxonpages/
+# Production Cascade: [taxonpages-deploy](https://PurdueEntomologicalResearchCollection.github.io/taxonpages-deploy/) — configured to run in Cascade (requires manual deployment): https://ag.purdue.edu/department/entm/perc/search-collection.html
+# Development Github Pages: [taxonpages-dev](https://PurdueEntomologicalResearchCollection.github.io/taxonpages-dev/) — auto-deployed to https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/
+# Development Cascade: [taxonpages-deploy-dev](https://PurdueEntomologicalResearchCollection.github.io/taxonpages-deploy-dev/) — configured to run in Cascade (requires manual deployment): https://ag.purdue.edu/department/agit/test/perc/
 
-There is one divergence between the two: in the `setup` branch, in `router.yml`:`base_url` is set to
-* `/taxonpages-dev/` in the `dev` repo, and
-* `/taxonpages/` in the `production` repo.
+There is one divergence between them: in the `setup` branch, in `router.yml`:`base_url` is set to:
+* `/taxonpages/` in the `taxonpages` repo
+* `/entm/perc/search-collection.html` in the `taxonpages-deploy` repo
+* `/taxonpages-dev/` in the `taxonpages-dev` repo
+* `/department/agit/test/perc/` in the `taxonpages-deploy-dev` repo
 
 Each is built using to GitHub Actions, following [these instructions](https://github.com/SpeciesFileGroup/taxonpages).
+
+## TODO: Explain how to deploy to Cascade
 
 ## Local Dev Setup
 
@@ -33,7 +37,7 @@ npm install
 npm run dev
 # 4. Make changes -- http://localhost:5173/taxonpages-dev/, edit code, and the app will hot-reload  
 # 5. Commit changes
-# TODO: Explain how to clean up after that funky branch setup
+# **TODO: Explain how to clean up after that funky branch setup**
 ```
 
 Option 2: Work only in one of the repos (simpler, but you can't commit changes to the other repo):
@@ -51,7 +55,7 @@ npm run dev
 # 3. Make changes -- http://localhost:5173/taxonpages-dev/, edit code, and the app will hot-reload
 # 4. Commit changes, being careful to not add foreign objects from the `setup` branch
 git add .
-# TODO finish this
+# **TODO finish this? Or delete?**
 git commit -m "Your message here"
 ```
 ---
