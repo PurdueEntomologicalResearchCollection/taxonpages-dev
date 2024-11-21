@@ -2,10 +2,13 @@
 
 It has four repos, each with its own GitHub Pages site — because a repo [can only have a single GitHub Pages site](https://github.com/orgs/community/discussions/21582):
 
-1. Production Github Pages: [taxonpages](https://PurdueEntomologicalResearchCollection.github.io/taxonpages/) — auto-deployed to https://purdueentomologicalresearchcollection.github.io/taxonpages/
-2. Production Cascade: [taxonpages-deploy](https://PurdueEntomologicalResearchCollection.github.io/taxonpages-deploy/) — configured to run in Cascade (requires manual deployment): https://ag.purdue.edu/department/entm/perc/search-collection.html
-3. Development Github Pages: [taxonpages-dev](https://PurdueEntomologicalResearchCollection.github.io/taxonpages-dev/) — auto-deployed to https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/
-4. Development Cascade: [taxonpages-deploy-dev](https://PurdueEntomologicalResearchCollection.github.io/taxonpages-deploy-dev/) — configured to run in Cascade (requires manual deployment): https://ag.purdue.edu/department/agit/test/perc/
+| Repo | Description | Deployed to | Method |
+|--|--|--|--|
+| taxonpages | Github Pages | https://purdueentomologicalresearchcollection.github.io/taxonpages/ | automatic |
+| taxonpages-deploy | Cascade | https://ag.purdue.edu/department/entm/perc/search-collection.html | manual |
+| taxonpages-dev | Github Pages | https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/ | automatic |
+| taxonpages-deploy-dev | Cascade | https://ag.purdue.edu/department/agit/test/perc/ | manual |
+
 
 There is one divergence between them: in the `setup` branch, in `router.yml`:`base_url` is set to:
 * `/taxonpages/` in the `taxonpages` repo
