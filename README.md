@@ -1,24 +1,17 @@
 # Purdue Entomology's [TaxonPages](https://github.com/SpeciesFileGroup/taxonpages)
 
-It has four repos, each with its own GitHub Pages site — because a repo [can only have a single GitHub Pages site](https://github.com/orgs/community/discussions/21582):
+It has four repos, each with its own GitHub Pages site — because a repo [can only have a single GitHub Pages site](https://github.com/orgs/community/discussions/21582). They diverge only in their `base_url` in the file `config/router.yml`.
 
-| Repo | Destination | Deployed URL | Method |
-|--|--|--|--|
-| taxonpages | Github Pages | https://purdueentomologicalresearchcollection.github.io/taxonpages/ | automatic |
-| taxonpages-deploy | Cascade | https://ag.purdue.edu/department/entm/perc/search-collection.html | [manual](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy/actions) |
-| taxonpages-dev | Github Pages | https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/ | automatic |
-| taxonpages-deploy-dev | Cascade | https://ag.purdue.edu/department/agit/test/perc/ | [manual](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions) |
+| Repo | Destination | `base_url` in `router.yml` |
+|--|--|--|
+| taxonpages | Github Pages:<br>https://purdueentomologicalresearchcollection.github.io/taxonpages/ | `/taxonpages/` |
+| taxonpages-deploy | Cascade — see [action log](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy/actions) for deployment:<br>https://ag.purdue.edu/department/entm/perc/search-collection.html | `/department/entm/perc/search-collection.html` |
+| taxonpages-dev | Github Pages:<br>https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/ | `/taxonpages-dev/` |
+| taxonpages-deploy-dev | Cascade — see [action log](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions) for deployment:<br>https://ag.purdue.edu/department/agit/test/perc/ | `/department/agit/test/perc/` |
 
+Each is built using to GitHub Actions, following [these instructions](https://github.com/SpeciesFileGroup/taxonpages). Deployment is automatic for those hosted on Github Pages, but for Cascade it requires manual steps of copying files. For now. In the future, hopefully we can automate Cascade deployments using the [Cascade API](https://www.hannonhill.com/cascadecms/latest/developing-in-cascade/rest-api/operations.html).
 
-There is one divergence between them: in the `setup` branch, in `router.yml`:`base_url` is set to:
-* `/taxonpages/` in the `taxonpages` repo
-* `/entm/perc/search-collection.html` in the `taxonpages-deploy` repo
-* `/taxonpages-dev/` in the `taxonpages-dev` repo
-* `/department/agit/test/perc/` in the `taxonpages-deploy-dev` repo
-
-Each is built using to GitHub Actions, following [these instructions](https://github.com/SpeciesFileGroup/taxonpages).
-
-## TODO: Explain how to deploy to Cascade
+### TODO: Explain how to deploy to Cascade
 
 ## Local Dev Setup
 
@@ -31,14 +24,14 @@ cd taxonpages
 # 2. Add the dev repo as a remote and configure dev branches
 git remote add dev git@github.com:PurdueEntomologicalResearchCollection/taxonpages-dev.git
 git fetch dev
-git branch -u dev/setup dev-setup
-git branch -u dev/main dev-main
+git checkout -b dev-setup dev/setup
+git checkout -b dev-main dev/main
 # 3. Run dev-main branch locally
 git checkout dev-main
 git checkout dev-setup .  # Yes, this is a funky thing to do, and you will have to clean up before committing
 npm install
 npm run dev
-# 4. Make changes -- http://localhost:5173/taxonpages-dev/, edit code, and the app will hot-reload  
+# 4. Make changes -- http://localhost:5173/taxonpages-dev/, edit code, and the app will hot-reload
 # 5. Commit changes
 # **TODO: Explain how to clean up after that funky branch setup**
 ```
