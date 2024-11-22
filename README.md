@@ -1,6 +1,8 @@
 # Purdue Entomology's [TaxonPages](https://github.com/SpeciesFileGroup/taxonpages)
 
-It has four repos, each with its own GitHub Pages site — because a repo [can only have a single GitHub Pages site](https://github.com/orgs/community/discussions/21582). They diverge only in their `base_url` in the file `config/router.yml`.
+**Purdue Entomological Research Collection** (PERC) homepage: https://ag.purdue.edu/department/entm/perc/
+
+The PERC instance of TaxonPages has four repos, each with its own GitHub Pages site — because a repo [can only have a single GitHub Pages site](https://github.com/orgs/community/discussions/21582). They diverge only in their `base_url` in the file `config/router.yml`.
 
 | Repo | Destination | `base_url` in `router.yml` |
 |--|--|--|
@@ -9,51 +11,73 @@ It has four repos, each with its own GitHub Pages site — because a repo [can o
 | taxonpages-dev | Github Pages:<br>https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/ | `/taxonpages-dev/` |
 | taxonpages-deploy-dev | Cascade — see [action log](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions) for deployment:<br>https://ag.purdue.edu/department/agit/test/perc/ | `/department/agit/test/perc/` |
 
-Each is built using to GitHub Actions, following [these instructions](https://github.com/SpeciesFileGroup/taxonpages). Deployment is automatic for those hosted on Github Pages, but for Cascade it requires manual steps of copying files. For now. In the future, hopefully we can automate Cascade deployments using the [Cascade API](https://www.hannonhill.com/cascadecms/latest/developing-in-cascade/rest-api/operations.html).
+Each uses GitHub Actions, following [these instructions](https://github.com/SpeciesFileGroup/taxonpages). Deployment is automatic for those hosted on Github Pages, but for Cascade it requires manual steps of copying files. For now. In the future, hopefully we can automate Cascade deployments using the [Cascade API](https://www.hannonhill.com/cascadecms/latest/developing-in-cascade/rest-api/operations.html).
 
 ### TODO: Explain how to deploy to Cascade
 
-## Local Dev Setup
+## Local Development
 
-Option 1: Work on both the prod and dev sites from a single local repo. 
+You'll need to clone multiple repos into a _single local git repo_. This may be a new experience, even for seasoned `git` users!
+
+1. Clone the production repo, like normal.
 
 ```bash
-# 1. Clone the production repo
 git clone git@github.com:PurdueEntomologicalResearchCollection/taxonpages.git
 cd taxonpages
-# 2. Add the dev repo as a remote and configure dev branches
+```
+
+2. Add the dev repo as a remote and configure dev branches.
+
+```bash
 git remote add dev git@github.com:PurdueEntomologicalResearchCollection/taxonpages-dev.git
 git fetch dev
 git checkout -b dev-setup dev/setup
 git checkout -b dev-main dev/main
-# 3. Run dev-main branch locally
+```
+
+3. Run the `dev-main` branch locally. You can follow the usual dev cycle — make changes , edit code, commit, repeat.
+
+```bash
 git checkout dev-main
 git checkout dev-setup .  # Yes, this is a funky thing to do, and you will have to clean up before committing
 npm install
 npm run dev
-# 4. Make changes -- http://localhost:5173/taxonpages-dev/, edit code, and the app will hot-reload
-# 5. Commit changes
-# **TODO: Explain how to clean up after that funky branch setup**
 ```
 
-Option 2: Work only in one of the repos (simpler, but you can't commit changes to the other repo):
+Open http://localhost:5173/taxonpages-dev/ to try it out, see changes hot reload, etc.
 
-```bash:
-# 1. Clone the repo you want to work on -- in this example, it's dev
-git clone git@github.com:PurdueEntomologicalResearchCollection/taxonpages-dev.git
-cd taxonpages-dev
-# 2. Do TaxonPages' funky branch setup
-git checkout main
-git checkout setup .
-# 2. Run locally
-npm install
-npm run dev
-# 3. Make changes -- http://localhost:5173/taxonpages-dev/, edit code, and the app will hot-reload
-# 4. Commit changes, being careful to not add foreign objects from the `setup` branch
-git add .
-# **TODO finish this? Or delete?**
-git commit -m "Your message here"
+4. Commit and push changes. This is where it gets a little weird, if you haven't worked with multiple repos before.
+
+```bash
+git commit -m "a good description of this commit"
+git push dev HEAD:main  # push to repository taxonpages-dev's the main branch
 ```
+
+This will [trigger a rebuild](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-dev/actions) in Github Pages, and after a minute or so, the deployed version will be ready to test at https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/
+
+5. Merge to `deploy-dev`, and Github Actions will build a new version. Be _sure_ you have committed your changes before you do this, because this step will **_erase anything that is not committed_**.
+
+   * The branch `deploy-dev` is the `taxonpages-deploy-dev` repository's `main` branch, if you followed the setup steps above.
+   * Again, this will [trigger a rebuild, but in the `deploy-dev` repo](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions), but [that version will not work](https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/) because it is configured to run inside Cascade CMS.
+
+```bash
+git reset --hard deploy-dev  # Warning: This will totally wipe out any changes you haven't committed.
+git merge dev  # follow prompts to pull your new changes into the deploy-dev branch
+```
+
+6. Deploy to Cascade CMS testing page.
+
+    * Download the zip file of artifacts by clicking on the [latest Github Actions workflow run](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions) → **build** → **Upload artifact** → **Artifact download URL**
+    * Upload the **assets** from that zip file to Cascade CMS, in the appropriate **assets** folder. It should be 4 files — one `.css` and three `.js`.
+    * In Cascade CMS, edit the HTML to refer to the new files. You will need to edit two filenames: one `.css` and one `.js`.
+    * Publish your changes. After 10-15 minutes, it will be live on the [PERC Search Test Page](https://ag.purdue.edu/department/agit/test/perc/).
+
+7. Promote to production, once testing is complete.
+
+    * Merge to the `main` and/or `deploy` branches, similar to above.
+    * Deploy to the main PERC test page.
+    * TODO finish details here.
+
 ---
 
 # TaxonPages
