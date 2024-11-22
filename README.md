@@ -17,9 +17,9 @@ Each uses GitHub Actions, following [these instructions](https://github.com/Spec
 
 ## Local Development
 
-You'll need to clone multiple repos into a _single local git repo_. This may be a new experience, even for seasoned `git` users!
+You'll need to [clone multiple repos into a _single local git repo_](https://jigarius.com/blog/multiple-git-remote-repositories). This may be a new experience — even for seasoned developers — but it works very well because it's a core feature of `git`.
 
-1. Clone the production repo, like normal.
+1. Clone the production repo, like you would normally. This will become your `origin` remote.
 
 ```bash
 git clone git@github.com:PurdueEntomologicalResearchCollection/taxonpages.git
@@ -46,7 +46,7 @@ npm run dev
 
 Open http://localhost:5173/taxonpages-dev/ to try it out, see changes hot reload, etc.
 
-4. Commit and push changes. This is where it gets a little weird, if you haven't worked with multiple repos before.
+4. Commit and push changes. This push will seem a little weird, if you haven't worked with multiple repos before.
 
 ```bash
 git commit -m "a good description of this commit"
@@ -55,28 +55,81 @@ git push dev HEAD:main  # push to repository taxonpages-dev's the main branch
 
 This will [trigger a rebuild](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-dev/actions) in Github Pages, and after a minute or so, the deployed version will be ready to test at https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/
 
-5. Merge to `deploy-dev`, and Github Actions will build a new version. Be _sure_ you have committed your changes before you do this, because this step will **_erase anything that is not committed_**.
+Congratulations, you have made changes locally and published them to Github Pages!
+
+## Deploying Changes to Cascade CMS
+
+After you make changes locally, you'll want to push them up the chain to the [Purdue test page](https://ag.purdue.edu/department/agit/test/perc/) and then to the [production PERC search page](https://ag.purdue.edu/department/entm/perc/search-collection.html).
+
+1. Tidy up your local branch. Be _sure_ you have committed your changes before you do this, because this step will **_erase anything that is not committed_**.
 
    * The branch `deploy-dev` is the `taxonpages-deploy-dev` repository's `main` branch, if you followed the setup steps above.
    * Again, this will [trigger a rebuild, but in the `deploy-dev` repo](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions), but [that version will not work](https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/) because it is configured to run inside Cascade CMS.
 
 ```bash
-git reset --hard deploy-dev  # Warning: This will totally wipe out any changes you haven't committed.
+git reset --hard  # Warning: This will totally wipe out any changes you haven't committed.
+```
+
+2. If you haven't already, add two more `git` remotes:
+
+```bash
+git checkout -b deploy-setup deploy/setup
+git checkout -b deploy-main deploy/main
+git checkout -b deploy-dev-setup deploy-dev/setup
+git checkout -b deploy-dev-main deploy-dev/main
+```
+
+3. Deploy to Cascade CMS testing page.
+
+   * First, merge to `deploy-dev`. Github Actions will build a new version, that you can deploy.
+
+```bash
+git checkout deploy-dev
 git merge dev  # follow prompts to pull your new changes into the deploy-dev branch
 ```
 
-6. Deploy to Cascade CMS testing page.
+   * Download the zip file of artifacts by clicking on the [latest Github Actions workflow run](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions) → **build** → **Upload artifact** → **Artifact download URL**
+   * Upload the **assets** from that zip file to Cascade CMS, in the appropriate **assets** folder. It should be 4 files — one `.css` and three `.js`.
+   * In Cascade CMS, edit the HTML to refer to the new files. You will need to edit two filenames: one `.css` and one `.js`.
+   * Publish your changes. After 10-15 minutes, it will be live on the [PERC Search Test Page](https://ag.purdue.edu/department/agit/test/perc/).
 
-    * Download the zip file of artifacts by clicking on the [latest Github Actions workflow run](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions) → **build** → **Upload artifact** → **Artifact download URL**
-    * Upload the **assets** from that zip file to Cascade CMS, in the appropriate **assets** folder. It should be 4 files — one `.css` and three `.js`.
-    * In Cascade CMS, edit the HTML to refer to the new files. You will need to edit two filenames: one `.css` and one `.js`.
-    * Publish your changes. After 10-15 minutes, it will be live on the [PERC Search Test Page](https://ag.purdue.edu/department/agit/test/perc/).
-
-7. Promote to production, once testing is complete.
+4. Promote to production, once testing is complete.
 
     * Merge to the `main` and/or `deploy` branches, similar to above.
-    * Deploy to the main PERC test page.
-    * TODO finish details here.
+    * See your changes in Github Pages: https://purdueentomologicalresearchcollection.github.io/taxonpages/
+    * Deploy to the [main PERC search page](https://ag.purdue.edu/department/entm/perc/search-collection.html).
+    * **_Voila, site updated!_**
+
+## Upstream changes
+
+To keep up with upstream changes — and also to contribute back — you'll need to connect with the [Species File Group](https://speciesfilegroup.org/)'s github repo: https://github.com/SpeciesFileGroup/taxonpages.
+
+### Catching up with upstream development
+
+1. Add the remotes (this may be familiar by now)
+
+```bash
+git remote add sfg https://github.com/SpeciesFileGroup/taxonpages.git
+git checkout -b sfg-main sfg/main
+git checkout -b sfg-setup sfg/setup
+```
+
+2. Merge upstream changes to your `dev` branch.
+
+```bash
+git checkout dev-main
+git merge sfg-main  # there will likely be conflicts, homework, npm install, testing, etc — plan for this to take a while
+git checkout dev-setup
+git merge sfg-setup  # probably straightforward? Let's hope.
+```
+
+3. Test and merge these changes into your other branches, and follow the steps as above for deployment.
+
+### Contributing upstream
+
+The pinnacle of open source development: _Contributing back to the community!_
+
+This is an advanced topic, and you will need to be in touch with the Species File Group (SFG) developers. The Purdue Entomology faculty and staff can help you get connected. You will [create a pull request](https://github.com/SpeciesFileGroup/taxonpages/compare/main...PurdueEntomologicalResearchCollection:taxonpages:main?expand=1) and review it with SFG developers.
 
 ---
 
