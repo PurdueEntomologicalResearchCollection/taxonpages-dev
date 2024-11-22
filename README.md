@@ -2,12 +2,12 @@
 
 It has four repos, each with its own GitHub Pages site — because a repo [can only have a single GitHub Pages site](https://github.com/orgs/community/discussions/21582):
 
-| Repo | Description | Deployed to | Method |
+| Repo | Destination | Deployed URL | Method |
 |--|--|--|--|
 | taxonpages | Github Pages | https://purdueentomologicalresearchcollection.github.io/taxonpages/ | automatic |
-| taxonpages-deploy | Cascade | https://ag.purdue.edu/department/entm/perc/search-collection.html | manual |
+| taxonpages-deploy | Cascade | https://ag.purdue.edu/department/entm/perc/search-collection.html | [manual](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy/actions) |
 | taxonpages-dev | Github Pages | https://purdueentomologicalresearchcollection.github.io/taxonpages-dev/ | automatic |
-| taxonpages-deploy-dev | Cascade | https://ag.purdue.edu/department/agit/test/perc/ | manual |
+| taxonpages-deploy-dev | Cascade | https://ag.purdue.edu/department/agit/test/perc/ | [manual](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions) |
 
 
 There is one divergence between them: in the `setup` branch, in `router.yml`:`base_url` is set to:
