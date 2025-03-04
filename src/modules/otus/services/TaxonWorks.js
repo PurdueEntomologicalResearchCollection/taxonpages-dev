@@ -80,6 +80,18 @@ export default class TaxonWorks {
     return makeAPIRequest.get(`/otus/${otuId}/inventory/dwc_gallery.json${perPage(opt)}`, opt)
   }
 
+  static getCollectionObjectsNotes(collectionObjectIds, opt) {
+    const processedOpt = {
+      ...opt,
+        params: {
+            ...opt?.params,
+            note_object_type: "CollectionObject",
+            "note_object_id[]": collectionObjectIds,
+        }
+    }
+    return makeAPIRequest.get(`/notes/`, processedOpt)
+  }
+
   /** Load image info (thumbnail, etc) from a URL such as one in a Darwin Core 'associatedMedia' field. */
   static getImageFromUrl(url, opt) {
     // sanity check that this is the kind of URL we're looking for

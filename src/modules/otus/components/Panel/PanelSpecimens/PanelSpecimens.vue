@@ -70,6 +70,7 @@
               :specimen="specimen"
               :otu-id="otuId"
               :images="getSpecimenImages(specimen)"
+              :notes="getNotes(specimen)"
           />
         </li>
       </ul>
@@ -93,7 +94,8 @@ const props = defineProps({
 
 const inventoryDWC = ref("Loading...")
 const inventoryGallery = ref(undefined)
-const isLoading = ref({dwc: false, gallery: false})
+const inventoryNotes = ref(undefined)
+const isLoading = ref({dwc: false, gallery: false, notes: false})
 const page = ref(1)
 const perPage = ref(20)
 const total = ref("???")
@@ -105,6 +107,13 @@ const getSpecimenImages = (specimen) => {
   ).reduce(
       // extract image records from the rest of the API response
       (result, i) => [...result, ...i.images], []
+  )
+}
+
+const getNotes = (specimen) => {
+  return !inventoryNotes.value ? [] : inventoryNotes.value.filter(
+      // just the notes for this specimen
+      n => n.note_object_id === specimen.dwc_occurrence_object_id
   )
 }
 
@@ -126,6 +135,17 @@ watch(
       // console.log({panel: "specimens", headers, data})
       inventoryDWC.value = data
       total.value = Number(headers['pagination-total'])
+
+      // Nested API request: Get notes for all specimens
+      const collectionObjectIds = data.map(s => s.dwc_occurrence_object_id)
+      useOtuPageRequest('panel:notes', () =>
+        TaxonWorks.getCollectionObjectsNotes(collectionObjectIds)
+      ).then(({data}) => {
+        inventoryNotes.value = data
+      }).catch(
+          e => console.error(`Error loading notes: ${e}`)
+      ).finally(() => isLoading.value = {...isLoading.value, notes: false})
+
     }).catch(
         e => inventoryDWC.value = `Error loading Darwin Core: ${e}`
     ).finally(() => isLoading.value = {...isLoading.value, dwc: false})

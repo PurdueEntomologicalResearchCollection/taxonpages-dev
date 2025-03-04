@@ -13,6 +13,9 @@ For further reference see https://dwc.tdwg.org/terms/.
         :images="images"
         :only-thumbs="true"
     />
+    <li v-for="note in notes" :key="note.id" class="my-2">
+      Note: {{ note.text }}
+    </li>
   </ul>
 </template>
 
@@ -31,6 +34,10 @@ const props = defineProps({
   otuId: {
     type: Number,
     required: true,
+  },
+  notes: {
+    type: Array,
+    default: [],
   },
 })
 
