@@ -24,12 +24,14 @@
               Taxa
             </VTableHeaderCell>
             <VTableHeaderCell
+              v-if="!hideNames"
               title="Taxon names"
               class="border-l border-base-border"
             >
               Names
             </VTableHeaderCell>
             <VTableHeaderCell
+              v-if="!hideNames"
               colspan="2"
               class="bg-base-foreground"
             />
@@ -42,13 +44,18 @@
               >Total</VTableHeaderCell
             >
             <VTableHeaderCell
+              v-if="!hideNames"
               title="Taxon names"
               class="border-l border-base-border"
             >
               Total
             </VTableHeaderCell>
-            <VTableHeaderCell> Valid </VTableHeaderCell>
-            <VTableHeaderCell> Invalid </VTableHeaderCell>
+            <VTableHeaderCell v-if="!hideNames">
+              Valid
+            </VTableHeaderCell>
+            <VTableHeaderCell v-if="!hideNames">
+              Invalid
+            </VTableHeaderCell>
           </VTableHeaderRow>
         </VTableHeader>
         <VTableBody>
@@ -58,11 +65,11 @@
           >
             <VTableBodyCell class="capitalize">{{ rank }}</VTableBodyCell>
             <VTableBodyCell v-if="isAdvancedView">{{ taxa }}</VTableBodyCell>
-            <VTableBodyCell class="border-l border-base-border">
+            <VTableBodyCell v-if="!hideNames" class="border-l border-base-border">
               {{ names.invalid + names.valid }}
             </VTableBodyCell>
-            <VTableBodyCell>{{ names.valid }}</VTableBodyCell>
-            <VTableBodyCell>{{ names.invalid }}</VTableBodyCell>
+            <VTableBodyCell v-if="!hideNames">{{ names.valid }}</VTableBodyCell>
+            <VTableBodyCell v-if="!hideNames">{{ names.invalid }}</VTableBodyCell>
           </VTableBodyRow>
         </VTableBody>
       </VTable>
@@ -94,16 +101,31 @@ const props = defineProps({
   otu: {
     type: Object,
     default: undefined
+  },
+
+  showTaxa: {
+    type: Boolean,
+    default: false
+  },
+
+  hideNames: {
+    type: Boolean,
+    default: false
   }
 })
 
 const store = useOtuStore()
-const isAdvancedView = ref(false)
+const isAdvancedView = ref(props.showTaxa)
+const hideNames = ref(props.hideNames)
 
 const menuOptions = computed(() => [
   {
     label: isAdvancedView.value ? 'Hide taxa' : 'Show taxa',
     action: () => (isAdvancedView.value = !isAdvancedView.value)
+  },
+  {
+    label: hideNames.value ? 'Show names' : 'Hide names',
+    action: () => (hideNames.value = !hideNames.value)
   }
 ])
 </script>
