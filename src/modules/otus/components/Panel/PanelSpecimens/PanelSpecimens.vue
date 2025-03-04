@@ -65,7 +65,7 @@
     <VCardContent class="text-sm">
       <p v-if="typeof inventoryDWC === 'string'" v-html="inventoryDWC"/>
       <ul v-else class="tree">
-        <li v-for="specimen in inventoryDWC" :key="specimen.id" class="py-3 border-b last:border-none first:pt-0 last:pb-0">
+        <li v-for="specimen in inventoryDWC" :key="specimen.id" class="py-3 border-b border-base-border last:border-none first:pt-0 last:pb-0">
           <SpecimenSummary
               :specimen="specimen"
               :otu-id="otuId"
