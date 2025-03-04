@@ -6,8 +6,8 @@ For further reference see https://dwc.tdwg.org/terms/.
 <template>
   <div v-html="nameAndAuthor(specimen)" class="font-bold mb-2"/>
   <ul class="tree ml-7 relative list-disc">
-    <li class="my-1 last:mb-0">{{ describeSpecimen(specimen) }}</li>
-    <li class="my-1 last:mb-0" v-if="describeDetails(specimen).length > 0">{{ describeDetails(specimen).join(', ') }}</li>
+    <li class="my-1 last:mb-0" v-if="describeSpecimen(specimen)">{{ describeSpecimen(specimen) }}</li>
+    <li class="my-1 last:mb-0" v-if="describeDetails(specimen).length">{{ describeDetails(specimen).join(', ') }}</li>
     <GalleryImage
         v-if="images.length"
         :images="images"
