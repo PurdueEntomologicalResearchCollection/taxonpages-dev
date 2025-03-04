@@ -4,16 +4,16 @@ of a specimen, from the TaxonWorks api /otus/<ID>/inventory/dwc.json.
 For further reference see https://dwc.tdwg.org/terms/.
 -->
 <template>
-  <div v-html="nameAndAuthor(specimen)"/>
-  <ul class="tree ml-6 relative">
-    <li class="my-2">{{ describeSpecimen(specimen) }}</li>
-    <li class="my-2">{{ describeDetails(specimen).join(', ') }}</li>
+  <div v-html="nameAndAuthor(specimen)" class="font-bold mb-2"/>
+  <ul class="tree ml-7 relative list-disc gap-2">
+    <li class="my-1 last:mb-0">{{ describeSpecimen(specimen) }}</li>
+    <li class="my-1 last:mb-0" v-if="describeDetails(specimen).length > 0">{{ describeDetails(specimen).join(', ') }}</li>
     <GalleryImage
         v-if="images.length"
         :images="images"
         :only-thumbs="true"
     />
-    <li v-for="note in notes" :key="note.id" class="my-2">
+    <li v-for="note in notes" :key="note.id" class="my-1 last:mb-0">
       Note: {{ note.text }}
     </li>
   </ul>
@@ -72,7 +72,7 @@ function describeDetails(specimen) {
     describeIdentifiedBy(specimen),
     specimen.georeferencedBy && `Geolocated by ${specimen.georeferencedBy}${describeGeoreferenceUncertainty(specimen)}`,
     // CollectionObject #1234
-    specimen.dwc_occurrence_object_id && `${specimen.dwc_occurrence_object_type} #${specimen.dwc_occurrence_object_id}`,
+    // specimen.dwc_occurrence_object_id && `${specimen.dwc_occurrence_object_type} #${specimen.dwc_occurrence_object_id}`,
   ].filter(Boolean)
 }
 
