@@ -7,7 +7,7 @@ For further reference see https://dwc.tdwg.org/terms/.
   <div v-html="nameAndAuthor(specimen)"/>
   <ul class="tree ml-6 relative">
     <li class="my-2">{{ describeSpecimen(specimen) }}</li>
-    <li class="my-2">{{describeDetails(specimen).join(', ')}}</li>
+    <li class="my-2">{{ describeDetails(specimen).join(', ') }}</li>
     <GalleryImage
         v-if="images.length"
         :images="images"
@@ -59,6 +59,7 @@ function describeSpecimen(specimen) {
 
 function describeDetails(specimen) {
   return [
+    specimen.individualCount !== 1 && `${specimen.individualCount} specimens`,
     describeCollectionDate(specimen),
     specimen.recordedBy && `Recorded by ${specimen.recordedBy}`,
     describeIdentifiedBy(specimen),
