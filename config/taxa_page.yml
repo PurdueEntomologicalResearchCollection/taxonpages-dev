@@ -1,0 +1,17 @@
+taxa_page:
+  overview:
+    panels:
+      - - - panel:gallery
+          - panel:specimens
+
+        - - panel:map
+          - panel:descendants
+          - panel:content
+          - panel:keys
+          - id: panel:statistics
+            bind:
+              showTaxa: true
+              hideNames: true
+          - panel:type
+          - panel:nomenclature
+          - panel:nomenclature-references
