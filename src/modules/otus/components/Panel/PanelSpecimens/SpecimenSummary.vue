@@ -16,6 +16,9 @@ For further reference see https://dwc.tdwg.org/terms/.
     <li v-for="note in notes" :key="note.id" class="my-1 last:mb-0">
       Note: {{ note.text }}
     </li>
+    <li v-for="tag in tags" :key="tag.id" class="my-1 last:mb-0">
+      Tag: {{ tag.keyword?.name ?? "no name provided" }}
+    </li>
   </ul>
 </template>
 
@@ -36,6 +39,10 @@ const props = defineProps({
     required: true,
   },
   notes: {
+    type: Array,
+    default: [],
+  },
+  tags: {
     type: Array,
     default: [],
   },

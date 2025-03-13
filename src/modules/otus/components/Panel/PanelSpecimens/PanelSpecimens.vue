@@ -71,6 +71,7 @@
               :otu-id="otuId"
               :images="getSpecimenImages(specimen)"
               :notes="getNotes(specimen)"
+              :tags="getTags(specimen)"
           />
         </li>
       </ul>
@@ -95,7 +96,8 @@ const props = defineProps({
 const inventoryDWC = ref("Loading...")
 const inventoryGallery = ref(undefined)
 const inventoryNotes = ref(undefined)
-const isLoading = ref({dwc: false, gallery: false, notes: false})
+const inventoryTags = ref(undefined)
+const isLoading = ref({dwc: false, gallery: false, notes: false, tags: false})
 const page = ref(1)
 const perPage = ref(20)
 const total = ref("???")
@@ -114,6 +116,13 @@ const getNotes = (specimen) => {
   return !inventoryNotes.value ? [] : inventoryNotes.value.filter(
       // just the notes for this specimen
       n => n.note_object_id === specimen.dwc_occurrence_object_id
+  )
+}
+
+const getTags = (specimen) => {
+  return !inventoryTags.value ? [] : inventoryTags.value.filter(
+      // just the notes for this specimen
+      n => n.tag_object_id === specimen.dwc_occurrence_object_id
   )
 }
 
@@ -136,15 +145,11 @@ watch(
       inventoryDWC.value = data
       total.value = Number(headers['pagination-total'])
 
-      // Nested API request: Get notes for all specimens
+      // Nested API requests: Get notes & tags for all specimens
       const collectionObjectIds = data.map(s => s.dwc_occurrence_object_id)
-      useOtuPageRequest('panel:notes', () =>
-        TaxonWorks.getCollectionObjectsNotes(collectionObjectIds)
-      ).then(({data}) => {
-        inventoryNotes.value = data
-      }).catch(
-          e => console.error(`Error loading notes: ${e}`)
-      ).finally(() => isLoading.value = {...isLoading.value, notes: false})
+      isLoading.value = {...isLoading.value, notes: true, tags: true}
+      makeLoader('panel:notes', 'notes', TaxonWorks.getCollectionObjectsNotes, inventoryNotes)(collectionObjectIds)
+      makeLoader('panel:tags', 'tags', TaxonWorks.getCollectionObjectsTags, inventoryTags)(collectionObjectIds)
 
     }).catch(
         e => inventoryDWC.value = `Error loading Darwin Core: ${e}`
@@ -162,4 +167,22 @@ watch(
   },
   {immediate: true}
 )
+
+// Helper function to create a loader function for notes and tags
+const makeLoader = (cacheKey, loadingKey, urlGenerator, localRef) => {
+  return async (collectionObjectIds) => {
+    try {
+      isLoading.value = {...isLoading.value, [loadingKey]: true}
+      const {data} = await useOtuPageRequest(cacheKey, () => urlGenerator(collectionObjectIds))
+      localRef.value = data
+    }
+    catch (e) {
+      console.error(`Error loading ${loadingKey}: ${e}`)
+    }
+    finally {
+      isLoading.value = {...isLoading.value, [loadingKey]: false}
+    }
+  }
+}
+
 </script>
