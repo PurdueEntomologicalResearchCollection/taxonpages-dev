@@ -88,7 +88,9 @@ git checkout deploy-dev
 git merge dev  # follow prompts to pull your new changes into the deploy-dev branch
 ```
 
-   * Download the zip file of artifacts by clicking on the [latest Github Actions workflow run](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions) → **build** → **Upload artifact** → **Artifact download URL**
+   * Download the zip file of artifacts by clicking on the latest Github **Actions** workflow run → **build** → **Upload artifact** → **Artifact download URL**
+     * Dev start here: [actions for the **deploy-dev** branch](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions)
+     * Prod start here: [actions for the **deploy** branch](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy/actions)
    * Upload the **assets** from that zip file to Cascade CMS, in the appropriate **assets** folder. It should be 4 files — one `.css` and three `.js`.
    * In Cascade CMS, edit the HTML to refer to the new files. You will need to edit two filenames: one `.css` and one `.js`.
    * Publish your changes. After 10-15 minutes, it will be live on the [PERC Search Test Page](https://ag.purdue.edu/department/agit/test/perc/).
@@ -145,9 +147,10 @@ TaxonPages software is in active development and changes are expected that will 
 
 1. Click on "Fork" button to create your own repository from this.
 2. Uncheck `Copy the setup branch only` and press `Save`
-3. After create your repo, go to `Settings > Pages`, on "Branch" select `gh-pages` and `/(root)`. Then press save
-4. Open `router.yml` file and change `base_url` to the name of your repository.
-5. After a couple of minutes, your public page should be available at `https://<your_user_name>.github.io/<your_repo_name>`
+3. After create your repo, go to `Settings > Pages`, on "Build and deployment - Source" select `GitHub Actions`.
+4. Go to `Actions` tab and press `I understand my workflows, go ahead and enable them` button
+5. Open `router.yml` file and change `base_url` to the name of your repository.
+6. After a couple of minutes, your public page should be available at `https://<your_user_name>.github.io/<your_repo_name>`
 
 ### Setup
 
@@ -326,6 +329,22 @@ taxa_page:
 #   rank_group: ['SpeciesGroup']
 #   panels:
 #     - - - panel:specimen-records
+```
+
+### Lifecycle hooks (Experimental feature)
+
+The `onCreatePage` and `onSSRPageCreate` functions allow you to execute code at the time the taxa page is created. `onSSRPageCreate` will be executed only on the server side in SSR mode. To make use of them it is necessary to include them in a file object called `pages/otus.config.js`. Both functions accept `otu`, `taxon`, `route` and `router` objects as parameters. Since `onCreatePage` runs on Taxa page component, it is possible to use hooks like `onMounted` or `onBeforeMount` inside it
+
+```javascript
+export default {
+  onSSRCreatePage: async ({ otu, taxon, route, router }) => {
+    // Your code here
+  },
+
+  onCreatePage: ({ otu, taxon, route, router }) => {
+    // Your code here
+  }
+}
 ```
 
 ### External panels
