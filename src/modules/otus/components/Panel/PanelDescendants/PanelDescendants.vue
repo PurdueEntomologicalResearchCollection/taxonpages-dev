@@ -72,6 +72,7 @@ watch(
       .then(({ data }) => {
         taxonomy.value = data
       })
+      .catch(() => {})
       .finally(() => (isLoading.value = false))
   },
   { immediate: true }
