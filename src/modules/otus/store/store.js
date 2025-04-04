@@ -19,6 +19,10 @@ export const useOtuStore = defineStore('otuStore', {
       taxonomy: {
         commonNames: [],
         synonyms: []
+      },
+      determinedToRank: {
+        isLoading: false,
+        data: {}
       }
     }
   },
@@ -69,6 +73,17 @@ export const useOtuStore = defineStore('otuStore', {
           cached.replace(url, `<a href="${url}">${url}</a>`)
         ),
         isLoading: false
+      }
+    },
+
+    async loadToRank(otuId, opts) {
+      this.determinedToRank.isLoading = true
+      const response = await useOtuPageRequest('determinedToRank', () =>
+        TaxonWorks.getDeterminedToRank(otuId, opts)
+      )
+      this.determinedToRank = {
+        isLoading: false,
+        data: response.data
       }
     },
 

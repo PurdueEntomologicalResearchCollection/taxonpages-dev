@@ -104,6 +104,14 @@ export default class TaxonWorks {
     return makeAPIRequest.get(`/tags/`, processedOpt)
   }
 
+  // Counts of specimens within a given taxon that are identified only to a certain rank, and no finer.
+  // For example, {class: null, order: null, family: 3, genus: 5, species; 25, subspecies: 2}
+  // would mean that 3 specimens (probably lots of multiple individuals) have only been identified
+  // down to the family level, so they are good candidates to borrow for further identification.
+  static getDeterminedToRank(otuId, opt) {
+    return makeAPIRequest.get(`/otus/${otuId}/inventory/determined_to_rank.json`, opt)
+  }
+
   /** Load image info (thumbnail, etc) from a URL such as one in a Darwin Core 'associatedMedia' field. */
   static getImageFromUrl(url, opt) {
     // sanity check that this is the kind of URL we're looking for
