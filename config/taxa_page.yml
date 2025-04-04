@@ -12,6 +12,7 @@ taxa_page:
             bind:
               showTaxa: true
               hideNames: true
+              showToRank: true
           - panel:type
           - panel:nomenclature
           - panel:nomenclature-references
