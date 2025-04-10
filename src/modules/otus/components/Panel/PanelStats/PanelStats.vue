@@ -23,7 +23,12 @@
             >
               Taxa
             </VTableHeaderCell>
-            <VTableHeaderCell v-if="showToRank"/>
+            <VTableHeaderCell
+                v-if="showToRank"
+                v-bind:title="tooltipToRank()"
+            >
+              Specimens
+            </VTableHeaderCell>
             <VTableHeaderCell
               v-if="!hideNames"
               title="Taxon names"
@@ -46,10 +51,10 @@
             >
             <VTableHeaderCell
                 v-if="showToRank"
-                title="Number of taxa determined to this rank"
+                v-bind:title="tooltipToRank()"
                 class="border-base-border"
             >
-              To rank
+              Determined
             </VTableHeaderCell>
             <VTableHeaderCell
               v-if="!hideNames"
@@ -73,7 +78,13 @@
           >
             <VTableBodyCell class="capitalize">{{ rank }}</VTableBodyCell>
             <VTableBodyCell v-if="isAdvancedView">{{ taxa }}</VTableBodyCell>
-            <VTableBodyCell v-if="showToRank">{{ toRank(rank) }}</VTableBodyCell>
+            <VTableBodyCell
+                v-if="showToRank"
+                v-bind:title="tooltipToRank(rank)"
+                v-title="tooltipToRank(rank)"
+            >
+              {{ toRank(rank) }}
+            </VTableBodyCell>
             <VTableBodyCell v-if="!hideNames" class="border-l border-base-border">
               {{ names.invalid + names.valid }}
             </VTableBodyCell>
@@ -137,6 +148,11 @@ const showToRank = ref(props.showToRank)
 if (props.showToRank) {
   store.loadToRank(props.otuId)
 }
+
+const tooltipToRank = (rank) =>
+    rank
+        ? `${toRank(rank)} specimens are determined ${rank.indexOf('speci') >= 0 ? 'fully' : 'only' } to ${rank}.`
+        : "How many specimens are determined only to this rank?"
 
 const toRank = (rank) => {
   const rankLc = rank.toLowerCase()
