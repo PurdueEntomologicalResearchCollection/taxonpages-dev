@@ -27,7 +27,6 @@
           </p>
         </AnimationOpacity>
       </ul>
-      <span v-if="!hasRecords && !isLoading">No records found.</span>
     </VCardContent>
   </VCard>
 </template>
