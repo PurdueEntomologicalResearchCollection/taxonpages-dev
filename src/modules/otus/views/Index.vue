@@ -20,7 +20,7 @@
               query-param="term"
               label="label_html"
               placeholder="Search name..."
-              :params="{ having_taxon_name_only: true }"
+              :params="{ having_taxon_name_only: true, include_common_names: true }"
               @select="loadOtu"
             />
           </div>
