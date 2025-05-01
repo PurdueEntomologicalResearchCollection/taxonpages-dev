@@ -14,7 +14,7 @@ const tabsLayout = Object.assign({
   ...taxa_page
 })
 
-function parsePanelConfiguraion(panelLayout) {
+function parsePanelConfiguration(panelLayout) {
   return panelLayout.map((row) =>
     row.map((col) =>
       col.map((panel) => {
@@ -37,7 +37,7 @@ for (const key in tabsLayout) {
   const tabLayout = tabsLayout[key]
 
   layouts[key] = {
-    panels: parsePanelConfiguraion(tabLayout?.panels || {}),
+    panels: parsePanelConfiguration(tabLayout?.panels || {}),
     rankGroup: tabLayout.rank_group || [],
     label: tabLayout.label
   }
