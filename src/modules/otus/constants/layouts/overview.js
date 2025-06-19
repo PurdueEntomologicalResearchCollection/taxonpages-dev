@@ -16,6 +16,7 @@ export const DEFAULT_OVERVIEW_LAYOUT = {
           'panel:type-specimen',
           'panel:nomenclature',
           'panel:nomenclature-references',
+          'panel:sounds'
         ]
       ]
     ]

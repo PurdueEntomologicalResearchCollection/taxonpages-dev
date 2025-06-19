@@ -334,8 +334,13 @@ taxa_page_overview:
 
       - - panel:map
         - panel:descendants
+        - panel:scrutiny
         - panel:content
+        - panel:keys
+        - panel:etymology
+        - panel:gbif
         - panel:statistics
+        - panel:sounds
 ```
 
 ## Defining global components

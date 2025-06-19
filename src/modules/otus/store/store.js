@@ -70,7 +70,9 @@ export const useOtuStore = defineStore('otuStore', {
       this.catalog = {
         ...response.data,
         sources: response.data.sources.map(({ cached, url }) =>
-          cached.replace(url, `<a href="${url}">${url}</a>`)
+          url 
+            ? cached.replace(url, `<a href="${url}">${url}</a>`) 
+            : cached
         ),
         isLoading: false
       }
