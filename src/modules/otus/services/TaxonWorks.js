@@ -133,4 +133,48 @@ export default class TaxonWorks {
   static getSounds(params) {
     return makeAPIRequest.get('/sounds', { params })
   }
+
+  // Get all tags available in the system
+  static getAllTags(opt) {
+    return makeAPIRequest.get('/tags', opt)
+  }
+
+  // Get all keywords (controlled vocabulary terms)
+  static getKeywords(opt) {
+    const processedOpt = {
+      ...opt,
+      params: {
+        ...opt?.params,
+        type: 'Keyword'
+      }
+    }
+    return makeAPIRequest.get('/controlled_vocabulary_terms', processedOpt)
+  }
+
+  // Get tags for specific keyword (tag name)
+  static getTagsByKeyword(keyword, opt) {
+    const processedOpt = {
+      ...opt,
+      params: {
+        ...opt?.params,
+        keyword_id: keyword
+      }
+    }
+    return makeAPIRequest.get('/tags', processedOpt)
+  }
+
+  // Get specimens (collection objects) filtered by keywords
+  static getCollectionObjectsByTags(keywordIds, opt) {
+    const processedOpt = {
+      ...opt,
+      params: {
+        ...opt?.params,
+        'keyword_id[]': keywordIds
+      }
+    }
+    return makeAPIRequest.get('/collection_objects', processedOpt)
+  }
+
+  // Note: Darwin Core endpoint doesn't support keyword filtering
+  // Use getDescendantsDarwinCore + getCollectionObjectsTags + client-side filtering instead
 }
