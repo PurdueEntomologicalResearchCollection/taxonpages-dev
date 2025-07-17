@@ -16,11 +16,11 @@ export const useImageStore = defineStore('imageStore', {
       this.controller?.abort()
     },
 
-    async loadImages(otuId) {
-      const UNSUPPORTED_FORMAT = ['image/tiff']
+    async loadImages(otuId, { sortOrder }) {
       const params = {
         extend: ['depictions', 'attribution', 'source', 'citations'],
-        otu_scope: ['all', 'coordinate_otus']
+        otu_scope: ['all', 'coordinate_otus'],
+        sort_order: sortOrder
       }
 
       this.controller = new AbortController()
@@ -33,14 +33,14 @@ export const useImageStore = defineStore('imageStore', {
           })
         )
 
-        this.images = response.data.map((item) => {
-          const image = { ...item }
+        this.images = response.data.image_order.filter(Boolean).map((id) => {
+          const image = { ...response.data.images[id] }
           const { url, project_token } = __APP_ENV__
 
-          if (UNSUPPORTED_FORMAT.includes(image.content_type)) {
-            if (item.original_png) {
-              image.original = `${url}/${item.original_png?.substring(8)}?project_token=${project_token}`
-            }
+          if (image.original_png) {
+            image.original = `${url}/${image.original_png?.substring(
+              8
+            )}?project_token=${project_token}`
           }
 
           return image
