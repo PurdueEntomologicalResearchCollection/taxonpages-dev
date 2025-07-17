@@ -23,11 +23,10 @@
             !taxonomy.nomenclatural_synonyms.length &&
             !taxonomy.descendants.length
           ">
-            No descendants of <span v-html="taxonomy.name"/>.
+            No descendants of <span v-html="taxonomy.name"/> found.
           </p>
         </AnimationOpacity>
       </ul>
-      <span v-if="!hasRecords && !isLoading">No records found.</span>
     </VCardContent>
   </VCard>
 </template>
