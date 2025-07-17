@@ -1,10 +1,11 @@
 <template>
   <Autocomplete
+    class="print:hidden min-w-full mb-2 md:min-w-fit md:ml-2 md:mb-0 md:w-96"
     url="/otus/autocomplete"
     query-param="term"
     label="label_html"
     :autofocus="autofocus"
-    :params="{ having_taxon_name_only: true }"
+    :params="{ having_taxon_name_only: true, include_common_names: true }"
     @select="loadOtu"
   />
 </template>
