@@ -24,6 +24,10 @@ module.exports = {
   darkMode: 'class',
 
   theme: {
+    container: {
+      center: true,
+      padding: '1rem'
+    },
     extend: {
       fontFamily: {
         main: ["acumin-pro", "sans-serif"],
