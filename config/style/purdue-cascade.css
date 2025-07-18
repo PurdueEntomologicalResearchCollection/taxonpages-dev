@@ -32,3 +32,9 @@
 #app .markdown-body h1 {
     font-size: 2.5rem;
 }
+
+#app .container {
+     /* Ensure container doesn't cause horizontal scrolling in CMS */
+     max-width: 100%;
+     box-sizing: border-box;
+ }
