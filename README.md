@@ -88,7 +88,9 @@ git checkout deploy-dev
 git merge dev  # follow prompts to pull your new changes into the deploy-dev branch
 ```
 
-   * Download the zip file of artifacts by clicking on the [latest Github Actions workflow run](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions) → **build** → **Upload artifact** → **Artifact download URL**
+   * Download the zip file of artifacts by clicking on the latest Github **Actions** workflow run → **build** → **Upload artifact** → **Artifact download URL**
+     * Dev start here: [actions for the **deploy-dev** branch](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy-dev/actions)
+     * Prod start here: [actions for the **deploy** branch](https://github.com/PurdueEntomologicalResearchCollection/taxonpages-deploy/actions)
    * Upload the **assets** from that zip file to Cascade CMS, in the appropriate **assets** folder. It should be 4 files — one `.css` and three `.js`.
    * In Cascade CMS, edit the HTML to refer to the new files. You will need to edit two filenames: one `.css` and one `.js`.
    * Publish your changes. After 10-15 minutes, it will be live on the [PERC Search Test Page](https://ag.purdue.edu/department/agit/test/perc/).
