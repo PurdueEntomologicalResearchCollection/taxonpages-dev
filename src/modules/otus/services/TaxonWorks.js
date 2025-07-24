@@ -43,6 +43,10 @@ export default class TaxonWorks {
     })
   }
 
+  static getObservations(params) {
+    return makeAPIRequest.get('/observations', { params })
+  }
+
   static getOtuImages(otuId, opt) {
     return makeAPIRequest.get(`/otus/${otuId}/inventory/images.json`, opt)
   }
