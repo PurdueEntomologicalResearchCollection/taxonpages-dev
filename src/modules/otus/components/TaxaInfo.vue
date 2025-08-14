@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h2 class="text-1xl capitalize">
+    <p class="text-1xl capitalize">
       {{ store.taxon?.rank || 'Combination' }}
-    </h2>
+    </p>
     <h1 class="text-xl dark:text-gray-100">
       <span>
         <span
