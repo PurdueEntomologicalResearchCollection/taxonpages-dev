@@ -18,6 +18,9 @@ export default () => {
 
   return defineConfig({
     base: configuration.base_url,
+    server: {
+      port: 5175
+    },
     define: {
       __APP_ENV__: configuration
     },

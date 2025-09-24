@@ -1,5 +1,5 @@
 <template>
-  <div class="tp-footer-citation pt-4 pb-2 break-words">
+  <div class="tp-footer-citation pt-4 pb-2 break-all">
     {{ project_authors }}
     <ClientOnly>
       <span v-html="store.nextAuthor" />
