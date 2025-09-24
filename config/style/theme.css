@@ -2,8 +2,8 @@
   --color-primary: 0, 0, 0;
   --color-primary-content: 255, 255, 255;
 
-  --color-secondary: 14, 165, 233;
-  --color-secondary-content: 255, 255, 255;
+  --color-secondary: 142, 111, 62; /* Purdue Aged Gold #8E6F3E - darker for better link visibility */
+  --color-secondary-content: 255, 255, 255; /* White text on dark gold for better contrast */
 
   --color-base-foreground: 255, 255, 255;
   --color-base-background: 245, 247, 251;
@@ -30,8 +30,8 @@
   --color-primary: 23, 23, 23;
   --color-primary-content: 255, 255, 255;
   
-  --color-secondary: 14, 165, 233;
-  --color-secondary-content: 255, 255, 255;
+  --color-secondary: 142, 111, 62; /* Purdue Aged Gold #8E6F3E - darker for better link visibility */
+  --color-secondary-content: 255, 255, 255; /* White text on dark gold for better contrast */
 
   --color-base-background: 23, 23, 23;
   --color-base-foreground: 38,38,38;
