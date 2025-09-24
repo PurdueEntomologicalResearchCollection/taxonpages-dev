@@ -96,6 +96,7 @@ All configuration is in YAML files under `config/`:
 - `taxa_page.yml`: Taxa page layout configuration
 - `maps.yml`: Map configuration
 - `metadata.yml`: SEO and meta tags
+- `features.yml`: Feature flags for experimental/incomplete features
 
 ## Important Notes
 
@@ -132,3 +133,25 @@ All configuration is in YAML files under `config/`:
 3. Upload assets (CSS + JS files) to Cascade
 4. Update HTML references in Cascade
 5. Publish changes
+## Feature Flags
+
+The `config/features.yml` file controls experimental/incomplete features:
+
+```yaml
+# Current flags:
+enable_specimen_tags: false  # Specimen tag filtering - set to true for dev, false for prod
+```
+
+**Active feature flags:**
+- `enable_specimen_tags`: Controls visibility of "Filter by tags" UI in specimen panel
+  - Location: `src/modules/otus/components/Panel/PanelSpecimens/PanelSpecimens.vue`
+  - Status: Incomplete - awaiting TaxonWorks API support for tag-based filtering
+  - Default: `false` for production, can be `true` for local development
+
+**Adding new feature flags:**
+1. Add to `config/features.yml`
+2. Access via `__APP_ENV__.your_feature_flag` in components
+3. Provide fallback: `const enabled = __APP_ENV__.your_feature_flag || false`
+4. Remember: config files are branch-specific (setup branches only)
+
+**Important:** When deploying, ensure production branches have experimental features set to `false`.

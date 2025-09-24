@@ -63,7 +63,7 @@
       </p>
         <PanelDropdown panel-key="panel:specimens" />
       </div>
-      <div class="mt-4">
+      <div v-if="enableSpecimenTags" class="mt-4">
         <MultiSelectTags
           v-model="selectedTagIds"
           :tags="availableTags"
@@ -113,16 +113,23 @@ const page = ref(1)
 const perPage = ref(20)
 const total = ref("???")
 
-// Tag filtering
-const { 
-  availableTags, 
-  selectedTagIds, 
-  loadTags, 
-  getFilteredSpecimens 
-} = useSpecimenTags()
+// Feature flag for specimen tag filtering
+const enableSpecimenTags = __APP_ENV__.enable_specimen_tags || false
 
-// Load tags when component mounts
-loadTags()
+// Initialize tag helpers conditionally
+const tagHelpers = enableSpecimenTags ? useSpecimenTags() : null
+
+// Use tag helpers if available, otherwise use defaults
+const availableTags = tagHelpers?.availableTags || ref([])
+const selectedTagIds = tagHelpers?.selectedTagIds || ref([])
+const loadTags = tagHelpers?.loadTags || (() => {})
+const getFilteredSpecimens = tagHelpers?.getFilteredSpecimens ||
+  ((otuId, options) => TaxonWorks.getDescendantsDarwinCore(otuId, options))
+
+// Load tags when component mounts (only if feature is enabled)
+if (enableSpecimenTags && loadTags) {
+  loadTags()
+}
 
 const getSpecimenImages = (specimen) => {
   return !inventoryGallery.value ? [] : inventoryGallery.value.filter(
