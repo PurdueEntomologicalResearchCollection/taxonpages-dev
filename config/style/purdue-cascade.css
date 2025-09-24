@@ -38,3 +38,27 @@
      max-width: 100%;
      box-sizing: border-box;
  }
+
+#app * {
+    /* Ensure border-box is used consistently within the app even if Cascade has different defaults */
+    box-sizing: border-box;
+}
+
+/* Neutralize Cascade's default margins and padding that might affect the app */
+#main-content #app {
+    /* Reset any margins Cascade might add to the app container */
+    margin: 0;
+    padding: 0;
+}
+
+#main-content #app > div:first-child {
+    /* Ensure the app's root div doesn't inherit unexpected spacing */
+    margin: 0;
+    padding: 0;
+}
+
+#app .tp-footer-citation {
+    /* Ensure citation links break properly even with very long URLs */
+    word-break: break-all;
+    overflow-wrap: anywhere;
+}
