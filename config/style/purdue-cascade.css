@@ -66,6 +66,7 @@
 /* Fix breadcrumb colors in Cascade */
 #app .breadcrumb {
     color: black;
+    padding: 0;
 }
 
 #app .breadcrumb svg {
