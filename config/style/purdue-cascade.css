@@ -79,3 +79,26 @@
     /* Ensure the current page text is black */
     color: black;
 }
+
+/* Make Taxonpages full-width -- override Cascade' container margins & paddings ONLY for sections containing our app */
+.page-section.wysiwyg-full-width:has(#app) {
+    /* Remove the 70px top margin when section contains our app */
+    margin: 0;
+    padding: 0;
+}
+
+.page-section.wysiwyg-full-width:has(#app) .container {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
+}
+
+.page-section.wysiwyg-full-width:has(#app) .row {
+    margin: 0;
+}
+
+.page-section.wysiwyg-full-width:has(#app) .col,
+.page-section.wysiwyg-full-width:has(#app) [class*="col-"] {
+    padding: 0;
+}
