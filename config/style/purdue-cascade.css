@@ -62,3 +62,19 @@
     word-break: break-all;
     overflow-wrap: anywhere;
 }
+
+/* Fix breadcrumb colors in Cascade */
+#app .breadcrumb {
+    color: black;
+}
+
+#app .breadcrumb svg {
+    /* Ensure arrow icons are visible */
+    stroke: currentColor;
+    color: rgb(142, 111, 62); /* Purdue Aged Gold for arrows */
+}
+
+#app .breadcrumb li:last-child {
+    /* Ensure the current page text is black */
+    color: black;
+}
