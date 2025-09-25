@@ -2,8 +2,9 @@
   --color-primary: 0, 0, 0;
   --color-primary-content: 255, 255, 255;
 
-  --color-secondary: 14, 165, 233;
-  --color-secondary-content: 255, 255, 255;
+  --color-secondary: 142, 111, 62; /* Purdue Aged Gold #8E6F3E - darker for better link visibility */
+  --color-secondary-light: 207, 185, 145; /* Purdue Boilermaker Gold #CFB991 - for dark backgrounds */
+  --color-secondary-content: 0, 0, 0; /* Black text - most secondary text is on white backgrounds */
 
   --color-base-foreground: 255, 255, 255;
   --color-base-background: 245, 247, 251;
@@ -29,9 +30,10 @@
 .dark {
   --color-primary: 23, 23, 23;
   --color-primary-content: 255, 255, 255;
-  
-  --color-secondary: 14, 165, 233;
-  --color-secondary-content: 255, 255, 255;
+
+  --color-secondary: 142, 111, 62; /* Purdue Aged Gold #8E6F3E - darker for better link visibility */
+  --color-secondary-light: 207, 185, 145; /* Purdue Boilermaker Gold #CFB991 - for dark backgrounds */
+  --color-secondary-content: 0, 0, 0; /* Black text - most secondary text is on white backgrounds */
 
   --color-base-background: 23, 23, 23;
   --color-base-foreground: 38,38,38;

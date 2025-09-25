@@ -1,0 +1,7 @@
+---
+# Feature flags for enabling/disabling experimental features
+# These are loaded into __APP_ENV__ and available throughout the app
+
+# Enable specimen tag filtering (still in development, needs API support)
+# Set to true for local development, false for production until API is ready
+enable_specimen_tags: false # Change this to enable/disable the feature
