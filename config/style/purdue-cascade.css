@@ -79,3 +79,51 @@
     /* Ensure the current page text is black */
     color: black;
 }
+
+/* Override Cascade's container system ONLY for sections containing our app */
+.page-section.wysiwyg-full-width:has(#app) {
+    /* Remove the 70px top margin when section contains our app */
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.page-section.wysiwyg-full-width:has(#app) .container {
+    /* Remove container's margins and padding only for our app's container */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.page-section.wysiwyg-full-width:has(#app) .row {
+    /* Remove row margins only for our app's row */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.page-section.wysiwyg-full-width:has(#app) .col,
+.page-section.wysiwyg-full-width:has(#app) [class*="col-"] {
+    /* Remove column padding only for our app's columns */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Alternative: Use container queries if browser supports them */
+@supports (container-type: inline-size) {
+    /* Make the section containing our app a container */
+    .page-section.wysiwyg-full-width:has(#app) {
+        container-type: inline-size;
+        container-name: app-section;
+    }
+
+    /* Apply full-width styles within the container */
+    @container app-section (min-width: 1px) {
+        #app {
+            margin-left: calc(-1 * var(--container-padding, 0px));
+            margin-right: calc(-1 * var(--container-padding, 0px));
+            width: calc(100% + 2 * var(--container-padding, 0px));
+        }
+    }
+}
