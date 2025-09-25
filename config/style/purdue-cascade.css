@@ -87,7 +87,8 @@
     padding: 0;
 }
 
-.page-section.wysiwyg-full-width:has(#app) .container {
+/* Specify just Cascade's container, and avoid changing our own container deeper down, with a child selector. " > " */
+.page-section.wysiwyg-full-width:has(#app) > .container {
     margin: 0;
     padding: 0;
     max-width: 100%;
