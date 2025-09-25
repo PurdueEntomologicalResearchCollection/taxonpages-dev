@@ -15,7 +15,7 @@
           <span>
             Data provided by
             <a
-              class="text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 font-medium"
+              class="text-secondary-light hover:text-secondary-content font-medium"
               target="_blank"
               href="https://taxonworks.org/"
             >
@@ -25,7 +25,7 @@
           <span>
             Pages by
             <a
-              class="text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 font-medium"
+              class="text-secondary-light hover:text-secondary-content font-medium"
               target="_blank"
               href="https://github.com/SpeciesFileGroup/taxonpages"
             >
@@ -35,7 +35,7 @@
           <span>
             Support (Services) by
             <a
-              class="text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 font-medium"
+              class="text-secondary-light hover:text-secondary-content font-medium"
               target="_blank"
               href="https://speciesfilegroup.org"
             >

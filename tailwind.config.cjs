@@ -59,6 +59,7 @@ module.exports = {
 
         secondary: {
           color: withOpacity('--color-secondary'),
+          light: withOpacity('--color-secondary-light'),
           content: withOpacity('--color-secondary-content')
         },
 
