@@ -1,16 +1,42 @@
-#main-content #app header:is(.flex) {
-    /* Cascade has its own page header, so hide the TaxonPages header.
-     * Even if we remove the header from the Vue app, a placeholder will be added. */
-    display: none;
+/* Make Taxonpages full-width -- override Cascade' container margins & paddings ONLY for sections containing our app */
+.page-section.wysiwyg-full-width:has(#app) {
+    /* Remove the 70px top margin when section contains our app */
+    margin: 0;
+    padding: 0;
+    .row {
+        margin: 0;
+    }
+}
+/* Specify just Cascade's .container, and avoid changing our own .container deeper down, with a child selector. " > " */
+.page-section.wysiwyg-full-width:has(#app) > .container {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
+}
+.page-section.wysiwyg-full-width:has(#app) .col,
+.page-section.wysiwyg-full-width:has(#app) [class*="col-"] {
+    padding: 0;
 }
 
-#main-content #app .h-screen {
-    /* TaxonPages takes over the screen, but that's not good behavior inside a Cascade page. */
-    height: unset;
-    min-height: 30rem;
-}
-
-#app {
+#main-content #app {
+    /* Reset any margins Cascade might add to the app container */
+    margin: 0;
+    padding: 0;
+    * {
+        /* Ensure border-box is used consistently within the app even if Cascade has different defaults */
+        box-sizing: border-box;
+    }
+    header:is(.flex) {
+        /* Cascade has its own page header, so hide the TaxonPages header.
+         * Even if we remove the header from the Vue app, a placeholder will be added. */
+        display: none;
+    }
+    .h-screen {
+        /* TaxonPages takes over the screen, but that's not good behavior inside a Cascade page. */
+        height: unset;
+        min-height: 30rem;
+    }
     /* Cascade has some opinions about spacing, color, and size that don't work well for TaxonPages. */
     color: black;
     h1, h2, h3, h4, h5, h6 {
@@ -27,79 +53,41 @@
     a {
         text-decoration: unset;
     }
-}
-
-#app .markdown-body h1 {
-    font-size: 2.5rem;
-}
-
-#app .container {
-     /* Ensure container doesn't cause horizontal scrolling in CMS */
-     max-width: 100%;
-     box-sizing: border-box;
- }
-
-#app * {
-    /* Ensure border-box is used consistently within the app even if Cascade has different defaults */
-    box-sizing: border-box;
-}
-
-/* Neutralize Cascade's default margins and padding that might affect the app */
-#main-content #app {
-    /* Reset any margins Cascade might add to the app container */
-    margin: 0;
-    padding: 0;
+    /* Fix breadcrumb colors in app -- Cascade defines its own outer .breadcrumb, white text on black bg */
+    .breadcrumb {
+        color: black;
+        padding: 0;
+        svg {
+            /* Ensure arrow icons are visible */
+            stroke: currentColor;
+            color: rgb(142, 111, 62); /* Purdue Aged Gold for arrows */
+        }
+        li:last-child {
+            /* Ensure the current page text is black */
+            color: black;
+        }
+    }
+    .container {
+        /* Cascade defines .container, and so does TaxonPages.
+         Override Cascade definition inside app, to prevent horizontal scrolling */
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .markdown-body h1 {
+        font-size: 2.5rem;
+    }
+    footer .bg-zinc-800 {
+        background-color: #3b3b3b; /* Purdue footer dark gray */
+    }
+    .tp-footer-citation {
+        /* Ensure citation links break properly even with very long URLs */
+        word-break: break-all;
+        overflow-wrap: anywhere;
+    }
 }
 
 #main-content #app > div:first-child {
     /* Ensure the app's root div doesn't inherit unexpected spacing */
     margin: 0;
-    padding: 0;
-}
-
-#app .tp-footer-citation {
-    /* Ensure citation links break properly even with very long URLs */
-    word-break: break-all;
-    overflow-wrap: anywhere;
-}
-
-/* Fix breadcrumb colors in Cascade */
-#app .breadcrumb {
-    color: black;
-    padding: 0;
-}
-
-#app .breadcrumb svg {
-    /* Ensure arrow icons are visible */
-    stroke: currentColor;
-    color: rgb(142, 111, 62); /* Purdue Aged Gold for arrows */
-}
-
-#app .breadcrumb li:last-child {
-    /* Ensure the current page text is black */
-    color: black;
-}
-
-/* Make Taxonpages full-width -- override Cascade' container margins & paddings ONLY for sections containing our app */
-.page-section.wysiwyg-full-width:has(#app) {
-    /* Remove the 70px top margin when section contains our app */
-    margin: 0;
-    padding: 0;
-}
-
-/* Specify just Cascade's container, and avoid changing our own container deeper down, with a child selector. " > " */
-.page-section.wysiwyg-full-width:has(#app) > .container {
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-    width: 100%;
-}
-
-.page-section.wysiwyg-full-width:has(#app) .row {
-    margin: 0;
-}
-
-.page-section.wysiwyg-full-width:has(#app) .col,
-.page-section.wysiwyg-full-width:has(#app) [class*="col-"] {
     padding: 0;
 }
