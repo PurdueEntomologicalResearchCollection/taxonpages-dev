@@ -76,7 +76,7 @@
     .markdown-body h1 {
         font-size: 2.5rem;
     }
-    footer .bg-zinc-800 {
+    footer.bg-zinc-800 {
         background-color: #3b3b3b; /* Purdue footer dark gray */
     }
     .tp-footer-citation {
