@@ -5,6 +5,9 @@
     - label: Home
       link: /
 
+    - label: Bibliography
+      link: /resources/tw/filter/bibliography
+
     - label: About
       link: /about
 

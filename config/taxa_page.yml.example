@@ -12,3 +12,8 @@ taxa_page:
           - panel:content
           - panel:keys
           - panel:statistics
+          - panel:sounds
+
+  biological_associations:
+    panels:
+      - - - panel:biological-associations

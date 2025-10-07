@@ -321,6 +321,8 @@ taxa_page:
           - panel:descendants
           - panel:content
           - panel:statistics
+          - panel:keys
+          - panel:sounds
 #
 # An example of a new tab:
 #
@@ -425,6 +427,8 @@ taxa_page_overview:
         - panel:descendants
         - panel:content
         - panel:statistics
+        - panel:keys
+        - panel:sounds
 ```
 
 ## Defining global components
