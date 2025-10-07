@@ -28,7 +28,7 @@ export default () => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
-        '#': path.resolve(__dirname, '.')
+        '~': path.resolve(process.cwd())
       }
     },
 

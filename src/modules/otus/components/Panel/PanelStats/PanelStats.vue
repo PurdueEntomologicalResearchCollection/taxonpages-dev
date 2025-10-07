@@ -12,7 +12,7 @@
         :menu-options="menuOptions"
       />
     </VCardHeader>
-    <VCardContent class="text-sm">
+    <VCardContent class="text-sm overflow-auto">
       <VTable>
         <VTableHeader>
           <VTableHeaderRow>
@@ -32,13 +32,14 @@
             <VTableHeaderCell
               v-if="!hideNames"
               title="Taxon names"
-              class="border-l border-base-border"
+              class="border-l border-r border-base-border"
+              colspan="2"
             >
-              Names
+              Valid names
             </VTableHeaderCell>
             <VTableHeaderCell
               v-if="!hideNames"
-              colspan="2"
+              colspan="3"
               class="bg-base-foreground"
             />
           </VTableHeaderRow>
@@ -49,10 +50,10 @@
               title="OTUs linked to valid protonyms"
               >Total</VTableHeaderCell
             >
+
             <VTableHeaderCell
                 v-if="showToRank"
                 v-bind:title="tooltipToRank()"
-                class="border-base-border"
             >
               Determined
             </VTableHeaderCell>
@@ -63,12 +64,13 @@
             >
               Total
             </VTableHeaderCell>
-            <VTableHeaderCell v-if="!hideNames">
-              Valid
-            </VTableHeaderCell>
-            <VTableHeaderCell v-if="!hideNames">
-              Invalid
-            </VTableHeaderCell>
+            <VTableHeaderCell class="border-l border-base-border"
+              >Extant</VTableHeaderCell
+            >
+            <VTableHeaderCell>Fossil</VTableHeaderCell>
+            <VTableHeaderCell class="border-l border-base-border"
+              >Invalid</VTableHeaderCell
+            >
           </VTableHeaderRow>
         </VTableHeader>
         <VTableBody>
@@ -81,15 +83,19 @@
             <VTableBodyCell
                 v-if="showToRank"
                 v-bind:title="tooltipToRank(rank)"
-                v-title="tooltipToRank(rank)"
             >
               {{ toRank(rank) }}
             </VTableBodyCell>
             <VTableBodyCell v-if="!hideNames" class="border-l border-base-border">
-              {{ names.invalid + names.valid }}
+              {{ names.invalid + names.valid_extant + names.valid_fossil }}
             </VTableBodyCell>
-            <VTableBodyCell v-if="!hideNames">{{ names.valid }}</VTableBodyCell>
-            <VTableBodyCell v-if="!hideNames">{{ names.invalid }}</VTableBodyCell>
+            <VTableBodyCell class="border-l border-base-border">{{
+              names.valid_extant
+            }}</VTableBodyCell>
+            <VTableBodyCell>{{ names.valid_fossil }}</VTableBodyCell>
+            <VTableBodyCell class="border-l border-base-border">{{
+              names.invalid
+            }}</VTableBodyCell>
           </VTableBodyRow>
         </VTableBody>
       </VTable>
