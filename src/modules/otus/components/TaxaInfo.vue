@@ -1,9 +1,9 @@
 <template>
   <div>
-    <p class="text-2xl capitalize">
+    <p class="text-2xl like-a-header capitalize">
       {{ store.taxon?.rank || 'Combination' }}
     </p>
-    <h1 class="text-xl dark:text-gray-100">
+    <h1 class="dark:text-gray-100">
       <span>
         <span
           :title="store.taxon?.short_status"
