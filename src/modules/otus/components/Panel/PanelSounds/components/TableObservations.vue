@@ -3,7 +3,7 @@
     <VTableHeader>
       <VTableHeaderRow>
         <VTableHeaderCell> Descriptor </VTableHeaderCell>
-        <VTableHeaderCell> </VTableHeaderCell>
+        <VTableHeaderCell> Value </VTableHeaderCell>
       </VTableHeaderRow>
     </VTableHeader>
     <VTableBody>

@@ -26,7 +26,7 @@
         <VTableHeader>
           <VTableHeaderRow>
             <VTableHeaderCell>Data</VTableHeaderCell>
-            <VTableHeaderCell></VTableHeaderCell>
+            <VTableHeaderCell>Value</VTableHeaderCell>
           </VTableHeaderRow>
         </VTableHeader>
         <VTableBody>

@@ -1,17 +1,24 @@
 <template>
   <div class="tp-autocomplete md:block relative w-fit">
+    <label
+      for="autocomplete-search-input"
+      class="sr-only"
+    >
+      {{ placeholder || 'Search' }}
+    </label>
     <div
       class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
     >
       <IconSearch class="w-4 h-4 text-gray-500" />
     </div>
     <InputText
+      id="autocomplete-search-input"
       ref="inputElement"
       v-model="typed"
       type="text"
       :autofocus="autofocus"
       autocomplete="off"
-      class="tp-autocomplete__input block box-border min-w-full p-1.5 pl-10 text-base-content rounded border sm:text-sm placeholder:text-sm dark:border-slate-700 border-gray-300 dark:placeholder:text-slate-400 focus:ring-primary-500 focus:border-primary-500"
+      class="tp-autocomplete__input block box-border min-w-full p-1.5 !pl-10 text-base-content rounded border sm:text-sm placeholder:text-sm dark:border-slate-700 border-gray-300 dark:placeholder:text-slate-400 focus:ring-primary-500 focus:border-primary-500"
       :placeholder="placeholder"
       @input="trigger"
     />
