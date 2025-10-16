@@ -40,18 +40,36 @@
     /* Cascade has some opinions about spacing, color, and size that don't work well for TaxonPages. */
     color: black;
     h1, h2, h3, h4, h5, h6 {
-        font-family: United Sans, Impact, sans-serif;
+        font-family: acumin-pro-extra-condensed, sans-serif;
         text-transform: unset;
-        font-size: unset;
         color: black;
         margin: unset;
-        line-height: unset;
+        line-height: 1.2;
+    }
+    h1 {
+        font-size: 2.25rem; /* 36px - more reasonable than Purdue's 48px */
+    }
+    h2 {
+        font-size: 1.75rem; /* 28px */
+    }
+    h3 {
+        font-size: 1.5rem; /* 24px */
+    }
+    .like-a-header {
+        font-family: acumin-pro-extra-condensed, sans-serif;
+        line-height: 1.2;
     }
     li, p {
         font-weight: 400;
     }
     a {
-        text-decoration: unset;
+        /* Purdue brand: monochromatic links (black on light, white on dark) with underline */
+        color: rgb(var(--color-base-content)) !important;
+        text-decoration: underline !important;
+    }
+    a:hover {
+        /* Remove underline on hover for clarity */
+        text-decoration: none !important;
     }
     /* Fix breadcrumb colors in app -- Cascade defines its own outer .breadcrumb, white text on black bg */
     .breadcrumb {
@@ -73,11 +91,20 @@
         max-width: 100%;
         box-sizing: border-box;
     }
+    /* Ensure all input fields maintain their padding */
+    input[type="text"],
+    input[type="search"] {
+        box-sizing: border-box;
+    }
     .markdown-body h1 {
         font-size: 2.5rem;
     }
     footer.bg-zinc-800 {
         background-color: #3b3b3b; /* Purdue footer dark gray */
+        /* Links in dark footer should be white */
+        a {
+            color: white !important;
+        }
     }
     .tp-footer-citation {
         /* Ensure citation links break properly even with very long URLs */
