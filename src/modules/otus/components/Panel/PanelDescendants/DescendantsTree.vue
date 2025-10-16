@@ -9,7 +9,7 @@
       class="absolute -left-2.5"
     />
     <router-link
-      class="hover:text-gray-900 text-secondary-color"
+      class="text-secondary-color"
       :to="{ name: 'otus-id', params: { id: taxonomy.otu_id } }"
       v-html="taxonomy.name"
     />

@@ -2,12 +2,12 @@
   <div class="relative">
     <div>
       <button
-        class="inline-flex items-center text-sm hover:text-gray-900 text-primary-500 dark:hover:text-gray-500"
+        class="inline-flex items-center text-sm text-secondary-color"
         @click="dropdownOpen = !dropdownOpen"
       >
         <slot />
         <svg
-          class="h-5 w-5 text-primary-500 print:hidden"
+          class="h-5 w-5 text-secondary-color print:hidden"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"

@@ -15,15 +15,34 @@ import './src/utils/globalVars'
 
 export default () => {
   const configuration = loadConfiguration(__dirname)
+  const cascadeMode = process.env.CASCADE_DEV === 'true'
 
   return defineConfig({
     base: configuration.base_url,
     server: {
-      port: 5175
+      port: 5175,
+      // Use custom HTML for Cascade dev mode
+      ...(cascadeMode && {
+        open: '/index-cascade-dev.html'
+      })
     },
     define: {
       __APP_ENV__: configuration
     },
+
+    // Set custom entry point for Cascade dev mode
+    ...(cascadeMode && {
+      build: {
+        rollupOptions: {
+          input: path.resolve(__dirname, 'index-cascade-dev.html'),
+          output: {
+            entryFileNames: 'assets/[name]-[hash]-min.js',
+            chunkFileNames: 'assets/[name]-[hash]-min.js',
+            assetFileNames: 'assets/[name]-[hash]-min.[ext]'
+          }
+        }
+      }
+    }),
 
     resolve: {
       alias: {
@@ -40,17 +59,19 @@ export default () => {
       }
     },
 
-    build: {
-      rollupOptions: {
-        output: {
-          // Append suffix "-min" to avoid trailing hyphens such as index-328ajA-.js
-          // (Cascade CMS doesn't allow filename bases ending with hyphens)
-          entryFileNames: 'assets/[name]-[hash]-min.js',
-          chunkFileNames: 'assets/[name]-[hash]-min.js',
-          assetFileNames: 'assets/[name]-[hash]-min.[ext]'
+    ...(!cascadeMode && {
+      build: {
+        rollupOptions: {
+          output: {
+            // Append suffix "-min" to avoid trailing hyphens such as index-328ajA-.js
+            // (Cascade CMS doesn't allow filename bases ending with hyphens)
+            entryFileNames: 'assets/[name]-[hash]-min.js',
+            chunkFileNames: 'assets/[name]-[hash]-min.js',
+            assetFileNames: 'assets/[name]-[hash]-min.[ext]'
+          }
         }
       }
-    },
+    }),
 
     plugins: [
       ViteRestart({ dir: ['config/**/*.yml'] }),

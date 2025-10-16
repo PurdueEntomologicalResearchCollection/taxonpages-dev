@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search PERC - Cascade Dev Mode</title>
+
+    <!-- Cascade CMS Stylesheets (loaded from production) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://www.purdue.edu/purdue/fonts/united-sans/united-sans.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/ghc8hdz.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.css" />
+    <link rel="stylesheet" href="https://dev.ag.purdue.edu/_files/css/nanogallery2.min.css" />
+    <link rel="stylesheet" href="https://dev.ag.purdue.edu/_files/css/hh-gallery.css" />
+    <link rel="stylesheet" href="https://ag.purdue.edu/_files/css/_style.css" />
+    <link rel="stylesheet" href="https://ag.purdue.edu/_files/css/_style_ag_only.css" />
+    <link rel="stylesheet" href="https://ag.purdue.edu/_files/css/lightbox.css" />
+
+    <!-- TaxonPages will inject its styles after these -->
+    <style>
+      body {font-family: acumin-pro, sans-serif;}
+      /* Cascade breadcrumb link hover effect */
+      .cascade-breadcrumb-link:hover {
+        text-decoration: underline !important;
+      }
+    </style>
+    <!--head-tags-->
+    <!--preload-links-->
+    <!--app-state-->
+  </head>
+  <body>
+    <!--body-tags-open-->
+
+    <!-- Simulated Cascade CMS Header (simplified) -->
+    <header role="banner" style="background-color: #000; color: #fff; padding: 1rem;">
+      <div style="max-width: 1200px; margin: 0 auto;">
+        <p style="margin: 0; font-size: 0.875rem;">Cascade CMS Header Placeholder</p>
+      </div>
+    </header>
+
+    <!-- Simulated Cascade Breadcrumb -->
+    <nav aria-label="breadcrumb" style="background-color: #000; color: #fff; padding: 0.5rem 0; font-family: acumin-pro-semi-condensed, sans-serif;">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+        <ol style="list-style: none; padding: 0; margin: 0; display: flex; gap: 0.5rem; font-size: 1rem;">
+          <li><a href="#" class="cascade-breadcrumb-link" style="color: #fff; text-decoration: none;">College Home</a></li>
+          <li>&gt;</li>
+          <li><a href="#" class="cascade-breadcrumb-link" style="color: #fff; text-decoration: none;">Entomology</a></li>
+          <li>&gt;</li>
+          <li><a href="#" class="cascade-breadcrumb-link" style="color: #fff; text-decoration: none;">Purdue Entomological Research Collection</a></li>
+          <li>&gt;</li>
+          <li style="color: #fff;">Search the Collection</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Main Content - This is where Cascade wraps our app -->
+    <main id="main-content">
+      <section class="page-section wysiwyg-full-width">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="wysiwyg">
+                <!-- TaxonPages app mounts here -->
+                <div id="app"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Purdue-themed Footer Section (between app and Cascade footer) -->
+    <div style="background-color: #000; color: #fff; padding: 3rem 0; font-family: acumin-pro, sans-serif;">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+          <!-- COMMUNICATION Column -->
+          <div>
+            <h3 style="font-size: 0.875rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Communication</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.875rem;">
+              <li style="margin-bottom: 0.5rem;"><a href="https://www.purdue.edu/apps/" style="color: #fff; text-decoration: none;">Employee Portal</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="https://www.purdue.edu/brightspace/" style="color: #fff; text-decoration: none;">Brightspace</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="https://www.purdue.edu/purdue/today/" style="color: #fff; text-decoration: none;">Purdue Today</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="https://www.office.com/" style="color: #fff; text-decoration: none;">Office 365</a></li>
+            </ul>
+          </div>
+
+          <!-- UNIVERSITY RESOURCES Column -->
+          <div>
+            <h3 style="font-size: 0.875rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">University Resources</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.875rem;">
+              <li style="margin-bottom: 0.5rem;"><a href="https://www.purdue.edu/directory/" style="color: #fff; text-decoration: none;">Purdue Directory</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="https://www.purdue.edu/campus-map/" style="color: #fff; text-decoration: none;">Campus Map</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="https://www.purdue.edu/physicalfacilities/" style="color: #fff; text-decoration: none;">Physical Facilities</a></li>
+            </ul>
+          </div>
+
+          <!-- COA RESOURCES Column -->
+          <div>
+            <h3 style="font-size: 0.875rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">CoA Resources</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.875rem;">
+              <li style="margin-bottom: 0.5rem;"><a href="https://ag.purdue.edu/directory.html" style="color: #fff; text-decoration: none;">CoA Directory</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="https://ag.purdue.edu/tech/" style="color: #fff; text-decoration: none;">Information Technology</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="https://ag.purdue.edu/agcomm/" style="color: #fff; text-decoration: none;">Agricultural Communications</a></li>
+            </ul>
+          </div>
+
+          <!-- PUBLICATIONS & RESOURCES Column -->
+          <div>
+            <h3 style="font-size: 0.875rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Publications & Resources</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.875rem;">
+              <li style="margin-bottom: 0.5rem;"><a href="https://ag.purdue.edu/stories.html" style="color: #fff; text-decoration: none;">CoA News and Stories</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="https://ag.purdue.edu/extension/" style="color: #fff; text-decoration: none;">Contact Purdue Ag</a></li>
+            </ul>
+          </div>
+
+          <!-- Purdue Agriculture Logo -->
+          <div style="text-align: right;">
+            <img src="https://ag.purdue.edu/_files/images/purdue-sig-black-gold-white-rgb.svg" alt="Purdue University College of Agriculture" style="max-width: 200px; height: auto;" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Simulated Cascade CMS Footer (simplified) -->
+    <footer role="contentinfo" style="background-color: #3b3b3b; color: #fff; padding: 2rem 0;">
+      <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+        <p style="margin: 0; font-size: 0.875rem;">
+          Page last modified: September 30, 2025<br>
+          Purdue Agriculture, 615 Mitch Daniels Blvd., West Lafayette, IN 47907-2053 USA, (765) 494-8392
+        </p>
+        <p style="margin: 0.5rem 0 0; font-size: 0.75rem;">
+          © 2025 The Trustees of Purdue University | Accessibility | An Equal Access/Equal Opportunity University
+        </p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/entry-client.js"></script>
+    <!--body-tags-->
+  </body>
+</html>

@@ -5,6 +5,7 @@
   "scripts": {
     "dev:ssr": "node server",
     "dev": "vite dev",
+    "dev:cascade": "CASCADE_DEV=true vite dev",
     "build": "vite build",
     "build:ssr": "npm run build:client && npm run build:server",
     "build:client": "vite build --ssrManifest --outDir dist/client",

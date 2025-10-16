@@ -31,7 +31,7 @@
             <router-link
                 v-if="showFirst"
                 :to="{ name: 'otus-id', params: { id: otuId } }"
-                class="hover:text-gray-900 text-secondary-color ml-2"
+                class="text-secondary-color ml-2"
                 v-html="'<<'"
                 @click="page = 1"
             />
@@ -39,7 +39,7 @@
             <router-link
                 v-if="showPrev"
                 :to="{ name: 'otus-id', params: { id: otuId } }"
-                class="hover:text-gray-900 text-secondary-color ml-2"
+                class="text-secondary-color ml-2"
                 v-html="'prev'"
                 @click="page--"
             />
@@ -47,7 +47,7 @@
             <router-link
                 v-if="showNext"
                 :to="{ name: 'otus-id', params: { id: otuId } }"
-                class="hover:text-gray-900 text-secondary-color ml-2"
+                class="text-secondary-color ml-2"
                 v-html="'next'"
                 @click="page++"
             />
@@ -55,7 +55,7 @@
             <router-link
                 v-if="showLast"
                 :to="{ name: 'otus-id', params: { id: otuId } }"
-                class="hover:text-gray-900 text-secondary-color ml-2"
+                class="text-secondary-color ml-2"
                 v-html="'>>'"
                 @click="page = Math.ceil(total / perPage)"
               />

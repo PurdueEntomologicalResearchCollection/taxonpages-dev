@@ -10,7 +10,7 @@
         class="w-3 h-3 mr-0.5 ml-0.5 opacity-50"
       />
       <RouterLink
-        class="inline-flex items-center text-sm hover:text-gray-900 dark:hover:text-gray-500 text-secondary-color"
+        class="inline-flex items-center text-sm text-secondary-color"
         :to="{ name: 'otus-id', params: { id: item.id } }"
       >
         {{ key }}

@@ -52,6 +52,9 @@ npm run dev
 # Start SSR development server
 npm run dev:ssr
 
+# Start Cascade CMS development mode (see section below)
+npm run dev:cascade
+
 # Build for production
 npm run build
 
@@ -67,6 +70,59 @@ npm run preview
 # Run production server (SSR)
 npm run serve
 ```
+
+## Cascade CMS Development Mode
+
+To facilitate local development with Cascade CMS styles, a special development mode is available that simulates the Cascade environment locally.
+
+### What it does:
+- Loads production Cascade CMS stylesheets (Bootstrap, Font Awesome, Purdue fonts, etc.)
+- Wraps your app in Cascade's HTML structure (header, breadcrumbs, footer, container divs)
+- Applies `config/style/purdue-cascade.css` to override Cascade styles
+- Allows you to see exactly how the app will look when deployed to Cascade without manual deployment
+
+### Usage:
+```bash
+npm run dev:cascade
+```
+
+Then navigate to `http://localhost:5175/taxonpages/index-cascade-dev.html` (or whichever port Vite chooses)
+
+### Files involved:
+- `index-cascade-dev.html`: HTML template with Cascade CMS wrapper structure
+- `config/style/purdue-cascade.css`: Style overrides to counteract Cascade's CSS
+- `vite.config.js`: Configured to support `CASCADE_DEV=true` environment variable
+
+### Cascade stylesheets loaded:
+- Bootstrap 4.5.2
+- Font Awesome 6.4.2
+- Purdue United Sans font
+- Adobe Typekit fonts
+- Swiper 5.4.5 (carousel library)
+- nanogallery2 (gallery styles)
+- hh-gallery (additional gallery styles)
+- Purdue Agriculture custom styles (`_style.css`, `_style_ag_only.css`)
+- Lightbox CSS
+
+### HTML structure:
+The app is wrapped in Cascade's typical structure:
+```
+<main id="main-content">
+  <section class="page-section wysiwyg-full-width">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="wysiwyg">
+            <div id="app"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+```
+
+This matches the production Cascade deployment structure exactly.
 
 ## Multi-Repository Git Setup
 
@@ -86,6 +142,19 @@ dev-main: Development GitHub Pages
 deploy-main: Production Cascade CMS
 deploy-dev-main: Test Cascade CMS
 ```
+
+## Contributing to Upstream
+
+This is a downstream fork of SpeciesFileGroup/taxonpages. See [UPSTREAM-CONTRIBUTING.md](./UPSTREAM-CONTRIBUTING.md) for detailed guidance on:
+- Which changes should be contributed upstream vs kept Purdue-specific
+- How to manage config files across working and setup branches
+- Workflows for contributing bug fixes and ADA improvements back to sfg
+- How to sync upstream changes without losing Purdue customizations
+
+**Quick rules:**
+- ✅ **Contribute upstream:** Bug fixes, ADA improvements, features using CSS variables
+- ❌ **Keep local:** Purdue branding files (`purdue-*.css`), config files, color values in `vars.css`
+- 🔧 **Config edits:** Switch to `*-setup` branch, edit, commit, then `git checkout <setup-branch> -- config/`
 
 ## Configuration Files
 
