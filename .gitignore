@@ -14,3 +14,4 @@ README.md
 .vite
 .idea
 logs
+.playwright-mcp
