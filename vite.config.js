@@ -67,7 +67,9 @@ export default () => {
             // (Cascade CMS doesn't allow filename bases ending with hyphens)
             entryFileNames: 'assets/[name]-[hash]-min.js',
             chunkFileNames: 'assets/[name]-[hash]-min.js',
-            assetFileNames: 'assets/[name]-[hash]-min.[ext]'
+            assetFileNames: 'assets/[name]-[hash]-min.[ext]',
+            // Force all code into a single chunk for easier manual deployment to Cascade CMS
+            manualChunks: () => 'index'
           }
         }
       }
