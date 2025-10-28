@@ -6,33 +6,35 @@
 @import '@/assets/css/purdue-united-sans.css';
 @import '@/assets/css/purdue-styles-ghc8hdz.css';
 
-* {
-  box-sizing: border-box;
-}
+#main-content #app {
+    * {
+        box-sizing: border-box;
+    }
 
-body {
-  @apply 
-    font-main
-    bg-base-background
-}
+    body {
+        @apply
+        font-main
+        bg-base-background
+    }
 
-a {
-  @apply text-secondary-color font-bold;
-}
+    a {
+        @apply text-secondary-color font-bold;
+    }
 
-/* Screen reader only - hides content visually but keeps it accessible */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
+    /* Screen reader only - hides content visually but keeps it accessible */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
 
-.dark {
-  color-scheme: dark;
+    .dark {
+        color-scheme: dark;
+    }
 }
