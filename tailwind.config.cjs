@@ -23,11 +23,11 @@ module.exports = {
 
   darkMode: 'class',
 
+  corePlugins: {
+    container: false  // Disable Tailwind's container - we define our own scoped version
+  },
+
   theme: {
-    container: {
-      center: true,
-      padding: '1rem'
-    },
     extend: {
       fontFamily: {
         main: ["acumin-pro", "sans-serif"],
