@@ -63,14 +63,99 @@
         font-weight: 400;
     }
     a {
-        /* Purdue brand: monochromatic links (black on light, white on dark) with underline */
-        color: rgb(var(--color-base-content)) !important;
-        text-decoration: underline !important;
+        /* Purdue brand: monochromatic links (black on light, white on dark) with bold */
+        color: rgb(var(--color-base-content));
+        font-weight: 700;
     }
-    a:hover {
-        /* Remove underline on hover for clarity */
-        text-decoration: none !important;
+    /* Remove styles from interactive controls and buttons */
+    .leaflet-control a,
+    button a,
+    [role="button"] a,
+    .leaflet-bar a {
+        text-decoration: none;
+        font-weight: normal;
     }
+
+    /* Override Bootstrap/Cascade spacing utilities to let Tailwind work */
+    /* Padding utilities */
+    .p-0 { padding: 0 !important; }
+    .p-1 { padding: 0.25rem !important; }
+    .p-2 { padding: 0.5rem !important; }
+    .p-3 { padding: 0.75rem !important; }
+    .p-4 { padding: 1rem !important; }
+    .p-5 { padding: 1.25rem !important; }
+    .p-6 { padding: 1.5rem !important; }
+
+    .px-1 { padding-left: 0.25rem !important; padding-right: 0.25rem !important; }
+    .px-2 { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
+    .px-3 { padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
+    .px-4 { padding-left: 1rem !important; padding-right: 1rem !important; }
+    .px-5 { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+
+    .py-1 { padding-top: 0.25rem !important; padding-bottom: 0.25rem !important; }
+    .py-2 { padding-top: 0.5rem !important; padding-bottom: 0.5rem !important; }
+    .py-3 { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+    .py-4 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+
+    .pl-0 { padding-left: 0 !important; }
+    .pl-1 { padding-left: 0.25rem !important; }
+    .pl-2 { padding-left: 0.5rem !important; }
+    .pl-3 { padding-left: 0.75rem !important; }
+    .pl-4 { padding-left: 1rem !important; }
+    .pl-5 { padding-left: 1.25rem !important; }
+    .pl-6 { padding-left: 1.5rem !important; }
+
+    .pr-0 { padding-right: 0 !important; }
+    .pr-1 { padding-right: 0.25rem !important; }
+    .pr-2 { padding-right: 0.5rem !important; }
+    .pr-3 { padding-right: 0.75rem !important; }
+    .pr-4 { padding-right: 1rem !important; }
+    .pr-5 { padding-right: 1.25rem !important; }
+
+    .pt-0 { padding-top: 0 !important; }
+    .pt-1 { padding-top: 0.25rem !important; }
+    .pt-2 { padding-top: 0.5rem !important; }
+    .pt-3 { padding-top: 0.75rem !important; }
+    .pt-4 { padding-top: 1rem !important; }
+    .pt-6 { padding-top: 1.5rem !important; }
+
+    .pb-0 { padding-bottom: 0 !important; }
+    .pb-2 { padding-bottom: 0.5rem !important; }
+    .pb-3 { padding-bottom: 0.75rem !important; }
+    .pb-4 { padding-bottom: 1rem !important; }
+    .pb-6 { padding-bottom: 1.5rem !important; }
+
+    /* Margin utilities */
+    .m-0 { margin: 0 !important; }
+    .m-1 { margin: 0.25rem !important; }
+    .m-2 { margin: 0.5rem !important; }
+    .m-4 { margin: 1rem !important; }
+    .m-auto { margin: auto !important; }
+
+    .mx-2 { margin-left: 0.5rem !important; margin-right: 0.5rem !important; }
+    .mx-4 { margin-left: 1rem !important; margin-right: 1rem !important; }
+    .mx-auto { margin-left: auto !important; margin-right: auto !important; }
+
+    .my-0 { margin-top: 0 !important; margin-bottom: 0 !important; }
+    .my-2 { margin-top: 0.5rem !important; margin-bottom: 0.5rem !important; }
+
+    .ml-0 { margin-left: 0 !important; }
+    .ml-2 { margin-left: 0.5rem !important; }
+    .ml-3 { margin-left: 0.75rem !important; }
+    .ml-4 { margin-left: 1rem !important; }
+    .ml-auto { margin-left: auto !important; }
+
+    .mr-1 { margin-right: 0.25rem !important; }
+    .mr-2 { margin-right: 0.5rem !important; }
+    .mr-3 { margin-right: 0.75rem !important; }
+
+    .mt-2 { margin-top: 0.5rem !important; }
+    .mt-3 { margin-top: 0.75rem !important; }
+    .mt-4 { margin-top: 1rem !important; }
+
+    .mb-2 { margin-bottom: 0.5rem !important; }
+    .mb-3 { margin-bottom: 0.75rem !important; }
+    .mb-4 { margin-bottom: 1rem !important; }
     /* Fix breadcrumb colors in app -- Cascade defines its own outer .breadcrumb, white text on black bg */
     .breadcrumb {
         color: black;
@@ -85,11 +170,41 @@
             color: black;
         }
     }
+    /* Define our own scoped container to avoid conflicts with Cascade's .container */
     .container {
-        /* Cascade defines .container, and so does TaxonPages.
-         Override Cascade definition inside app, to prevent horizontal scrolling */
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
         max-width: 100%;
         box-sizing: border-box;
+    }
+    /* Responsive max-widths for container - matching Tailwind defaults but scoped to #app */
+    @media (min-width: 640px) {
+        .container {
+            max-width: 640px;
+        }
+    }
+    @media (min-width: 768px) {
+        .container {
+            max-width: 768px;
+        }
+    }
+    @media (min-width: 1024px) {
+        .container {
+            max-width: 1024px;
+        }
+    }
+    @media (min-width: 1280px) {
+        .container {
+            max-width: 1280px;
+        }
+    }
+    @media (min-width: 1536px) {
+        .container {
+            max-width: 1536px;
+        }
     }
     /* Ensure all input fields maintain their padding */
     input[type="text"],
