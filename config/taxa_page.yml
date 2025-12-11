@@ -7,12 +7,15 @@ taxa_page:
         - - panel:map
           - panel:descendants
           - panel:content
-          - panel:keys
           - id: panel:statistics
             bind:
               showTaxa: true
+              showDetermined: true
               hideNames: true
-              showToRank: true
+              hideExtant: true
+              hideFossil: true
+              hideInvalid: true
+          - panel:keys
           - panel:type
           - panel:nomenclature
           - panel:nomenclature-references
