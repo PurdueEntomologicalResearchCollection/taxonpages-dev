@@ -6,20 +6,221 @@
 @import '@/assets/css/purdue-united-sans.css';
 @import '@/assets/css/purdue-styles-ghc8hdz.css';
 
+/* ==========================================================================
+   Scoped Preflight (Tailwind base reset)
+
+   Tailwind's preflight is disabled to prevent global CSS leakage into Cascade CMS.
+   These styles provide the same resets, scoped to our app container.
+   ========================================================================== */
+
+/* Universal reset with :where() to keep low specificity so utilities/components can override */
+:where(#main-content #app) *,
+:where(#main-content #app) *::before,
+:where(#main-content #app) *::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+}
+
 #main-content #app {
-    * {
-        box-sizing: border-box;
+    /* Base document reset (applied to the app container itself) */
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    tab-size: 4;
+    font-family: acumin-pro, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: rgb(var(--color-page-background));
+
+    /* Horizontal rule reset */
+    hr {
+        height: 0;
+        color: inherit;
+        border-top-width: 1px;
     }
 
-    body {
-        @apply
-        font-main
-        bg-base-background
+    /* Abbreviation reset */
+    abbr:where([title]) {
+        text-decoration: underline dotted;
     }
 
+    /* Heading reset - inherit from parent */
+    h1, h2, h3, h4, h5, h6 {
+        font-size: inherit;
+        font-weight: inherit;
+    }
+
+    /* Link reset - inherit colors/decoration */
     a {
-        @apply text-secondary-color font-bold;
+        color: inherit;
+        text-decoration: inherit;
     }
+
+    /* Bold reset */
+    b, strong {
+        font-weight: bolder;
+    }
+
+    /* Code font reset */
+    code, kbd, samp, pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 1em;
+    }
+
+    /* Small text reset */
+    small {
+        font-size: 80%;
+    }
+
+    /* Subscript/superscript reset */
+    sub, sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+        vertical-align: baseline;
+    }
+
+    sub {
+        bottom: -0.25em;
+    }
+
+    sup {
+        top: -0.5em;
+    }
+
+    /* Table reset */
+    table {
+        text-indent: 0;
+        border-color: inherit;
+        border-collapse: collapse;
+    }
+
+    /* Form element reset */
+    button, input, optgroup, select, textarea {
+        font-family: inherit;
+        font-feature-settings: inherit;
+        font-variation-settings: inherit;
+        font-size: 100%;
+        font-weight: inherit;
+        line-height: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        margin: 0;
+        padding: 0;
+    }
+
+    button, select {
+        text-transform: none;
+    }
+
+    button,
+    input:where([type="button"]),
+    input:where([type="reset"]),
+    input:where([type="submit"]) {
+        -webkit-appearance: button;
+        background-color: transparent;
+        background-image: none;
+    }
+
+    :-moz-focusring {
+        outline: auto;
+    }
+
+    :-moz-ui-invalid {
+        box-shadow: none;
+    }
+
+    progress {
+        vertical-align: baseline;
+    }
+
+    ::-webkit-inner-spin-button,
+    ::-webkit-outer-spin-button {
+        height: auto;
+    }
+
+    [type="search"] {
+        -webkit-appearance: textfield;
+        outline-offset: -2px;
+    }
+
+    ::-webkit-search-decoration {
+        -webkit-appearance: none;
+    }
+
+    ::-webkit-file-upload-button {
+        -webkit-appearance: button;
+        font: inherit;
+    }
+
+    summary {
+        display: list-item;
+    }
+
+    /* Margin reset for block elements */
+    blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
+        margin: 0;
+    }
+
+    fieldset {
+        margin: 0;
+        padding: 0;
+    }
+
+    legend {
+        padding: 0;
+    }
+
+    /* List reset */
+    ol, ul, menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    dialog {
+        padding: 0;
+    }
+
+    /* Textarea reset */
+    textarea {
+        resize: vertical;
+    }
+
+    /* Placeholder styling */
+    input::placeholder,
+    textarea::placeholder {
+        opacity: 1;
+        color: #9ca3af;
+    }
+
+    /* Button/role cursor */
+    button, [role="button"] {
+        cursor: pointer;
+    }
+
+    :disabled {
+        cursor: default;
+    }
+
+    /* Media element reset */
+    img, svg, video, canvas, audio, iframe, embed, object {
+        display: block;
+        vertical-align: middle;
+    }
+
+    img, video {
+        max-width: 100%;
+        height: auto;
+    }
+
+    [hidden]:where(:not([hidden="until-found"])) {
+        display: none;
+    }
+
+    /* ==========================================================================
+       App-specific styles (non-preflight)
+       ========================================================================== */
 
     /* Screen reader only - hides content visually but keeps it accessible */
     .sr-only {

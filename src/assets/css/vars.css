@@ -11,7 +11,8 @@
   --color-danger: 239, 68, 68;
 
   --color-base-foreground: 255, 255, 255;
-  --color-base-background: 245, 247, 251;
+  --color-base-background: 245, 247, 251; /* Title area */
+  --color-page-background: 237, 237, 237; /* Main body, behind cards, as seen in the top gray bar on https://marcom.purdue.edu/our-brand/visual-identity/ */
   --color-base-muted: 226, 232, 240;
   --color-base-soft: 156, 163, 175;
   --color-base-lighter: 55, 65, 81;

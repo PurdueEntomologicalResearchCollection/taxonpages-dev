@@ -24,7 +24,8 @@ module.exports = {
   darkMode: 'class',
 
   corePlugins: {
-    container: false  // Disable Tailwind's container - we define our own scoped version
+    container: false,  // Disable Tailwind's container - we define our own scoped version
+    preflight: false   // Disable Tailwind's preflight - we define our own scoped version in main.css
   },
 
   theme: {

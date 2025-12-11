@@ -24,7 +24,7 @@
               Taxa
             </VTableHeaderCell>
             <VTableHeaderCell
-                v-if="showToRank"
+                v-if="showDetermined"
                 v-bind:title="tooltipToRank()"
             >
               Specimens
@@ -52,7 +52,7 @@
             >
 
             <VTableHeaderCell
-                v-if="showToRank"
+                v-if="showDetermined"
                 v-bind:title="tooltipToRank()"
             >
               Determined
@@ -64,11 +64,15 @@
             >
               Total
             </VTableHeaderCell>
-            <VTableHeaderCell class="border-l border-base-border"
+            <VTableHeaderCell
+              v-if="!hideExtant"
+              class="border-l border-base-border"
               >Extant</VTableHeaderCell
             >
-            <VTableHeaderCell>Fossil</VTableHeaderCell>
-            <VTableHeaderCell class="border-l border-base-border"
+            <VTableHeaderCell v-if="!hideFossil">Fossil</VTableHeaderCell>
+            <VTableHeaderCell
+              v-if="!hideInvalid"
+              class="border-l border-base-border"
               >Invalid</VTableHeaderCell
             >
           </VTableHeaderRow>
@@ -81,7 +85,7 @@
             <VTableBodyCell class="capitalize">{{ rank }}</VTableBodyCell>
             <VTableBodyCell v-if="isAdvancedView">{{ taxa }}</VTableBodyCell>
             <VTableBodyCell
-                v-if="showToRank"
+                v-if="showDetermined"
                 v-bind:title="tooltipToRank(rank)"
             >
               {{ toRank(rank) }}
@@ -89,11 +93,15 @@
             <VTableBodyCell v-if="!hideNames" class="border-l border-base-border">
               {{ names.invalid + names.valid_extant + names.valid_fossil }}
             </VTableBodyCell>
-            <VTableBodyCell class="border-l border-base-border">{{
+            <VTableBodyCell
+              v-if="!hideExtant"
+              class="border-l border-base-border">{{
               names.valid_extant
             }}</VTableBodyCell>
-            <VTableBodyCell>{{ names.valid_fossil }}</VTableBodyCell>
-            <VTableBodyCell class="border-l border-base-border">{{
+            <VTableBodyCell v-if="!hideFossil">{{ names.valid_fossil }}</VTableBodyCell>
+            <VTableBodyCell
+              v-if="!hideInvalid"
+              class="border-l border-base-border">{{
               names.invalid
             }}</VTableBodyCell>
           </VTableBodyRow>
@@ -134,13 +142,28 @@ const props = defineProps({
     default: false
   },
 
-  // Show "Determined to Rank" column?
-  showToRank: {
+  // Show "Determined" (specimens determined to this rank) column?
+  showDetermined: {
     type: Boolean,
     default: false
   },
 
   hideNames: {
+    type: Boolean,
+    default: false
+  },
+
+  hideExtant: {
+    type: Boolean,
+    default: false
+  },
+
+  hideFossil: {
+    type: Boolean,
+    default: false
+  },
+
+  hideInvalid: {
     type: Boolean,
     default: false
   }
@@ -149,9 +172,12 @@ const props = defineProps({
 const store = useOtuStore()
 const isAdvancedView = ref(props.showTaxa)
 const hideNames = ref(props.hideNames)
-const showToRank = ref(props.showToRank)
+const showDetermined = ref(props.showDetermined)
+const hideExtant = ref(props.hideExtant)
+const hideFossil = ref(props.hideFossil)
+const hideInvalid = ref(props.hideInvalid)
 
-if (props.showToRank) {
+if (props.showDetermined) {
   store.loadToRank(props.otuId)
 }
 
@@ -181,8 +207,20 @@ const menuOptions = computed(() => [
     action: () => (hideNames.value = !hideNames.value)
   },
   {
-    label: showToRank.value ? 'Hide to rank' : 'Show to rank',
-    action: () => (showToRank.value = !showToRank.value)
+    label: showDetermined.value ? 'Hide determined' : 'Show determined',
+    action: () => (showDetermined.value = !showDetermined.value)
+  },
+  {
+    label: hideExtant.value ? 'Show extant' : 'Hide extant',
+    action: () => (hideExtant.value = !hideExtant.value)
+  },
+  {
+    label: hideFossil.value ? 'Show fossil' : 'Hide fossil',
+    action: () => (hideFossil.value = !hideFossil.value)
+  },
+  {
+    label: hideInvalid.value ? 'Show invalid' : 'Hide invalid',
+    action: () => (hideInvalid.value = !hideInvalid.value)
   }
 ])
 </script>

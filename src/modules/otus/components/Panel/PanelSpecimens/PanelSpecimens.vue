@@ -73,7 +73,7 @@
     </VCardHeader>
     <VCardContent class="text-sm">
       <p v-if="typeof inventoryDWC === 'string'" v-html="inventoryDWC"/>
-      <ul v-else class="tree">
+      <ul v-else class="specimen-records">
         <li v-for="specimen in inventoryDWC" :key="specimen.id" class="py-3 border-b border-base-border last:border-none first:pt-0 last:pb-0">
           <SpecimenSummary
               :specimen="specimen"
@@ -221,3 +221,12 @@ const makeLoader = (cacheKey, loadingKey, urlGenerator, localRef) => {
 }
 
 </script>
+
+<style lang="scss">
+#main-content #app ul.specimen-records {
+  list-style-type: none;
+  li {
+    display: list-item;
+  }
+}
+</style>

@@ -5,7 +5,7 @@ For further reference see https://dwc.tdwg.org/terms/.
 -->
 <template>
   <div v-html="nameAndAuthor(specimen)" class="font-bold mb-2"/>
-  <ul class="tree ml-7 relative list-disc">
+  <ul class="specimen-list ml-7 relative list-disc">
     <li class="my-1 last:mb-0" v-if="describeSpecimen(specimen)">{{ describeSpecimen(specimen) }}</li>
     <li class="my-1 last:mb-0" v-if="describeDetails(specimen).length">{{ describeDetails(specimen).join(', ') }}</li>
     <GalleryImage
@@ -108,3 +108,13 @@ function describeGeoreferenceUncertainty(specimen) {
   return specimen.coordinateUncertaintyInMeters ? ` to within ${specimen.coordinateUncertaintyInMeters} meters` : ""
 }
 </script>
+
+<style lang="scss">
+#main-content #app ul.specimen-list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  li {
+    display: list-item;
+  }
+}
+</style>

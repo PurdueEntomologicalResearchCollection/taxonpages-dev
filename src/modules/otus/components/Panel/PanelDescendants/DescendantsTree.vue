@@ -82,41 +82,64 @@ const loadDescendants = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-.tree {
+<style lang="scss">
+/* Non-scoped styles for recursive tree - needs to apply to all descendant levels */
+ul.tree {
   list-style: none;
   margin: 0;
   padding: 0;
 
-  ul {
-    margin-left: 14px;
+  ul.tree {
+    margin-left: 20px;
   }
 
   li {
     position: relative;
     margin: 0;
-    padding: 0px 6px;
-    border-left: 1px solid rgb(100, 100, 100);
+    padding: 6px 6px 6px 20px; /* Extra left padding for button */
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: rgb(100, 100, 100);
   }
 
   li:last-child {
-    border-left: none;
+    border-left-color: transparent;
   }
 
+  /* Horizontal branch line - positioned to center on button */
   li:before {
-    position: relative;
-    top: -0.3em;
-    height: 1em;
-    width: 12px;
-    color: white;
-    border-bottom: 1px solid rgb(100, 100, 100);
     content: '';
-    display: inline-block;
-    left: -6px;
+    position: absolute;
+    top: 16px;
+    left: 0;
+    width: 16px; /* Reach to button center */
+    height: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(100, 100, 100);
   }
 
+  /* L-shaped corner for last child */
   li:last-child:before {
-    border-left: 1px solid rgb(100, 100, 100);
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: rgb(100, 100, 100);
+    height: 16px;
+    left: -1px;
+    top: 0;
   }
+  button.button-expand {
+    position: absolute;
+    left: 0;
+    top: 6px;
+    border-radius: 50%;
+    z-index: 1;
+  }
+}
+
+/* Expand button - opaque white background so lines go behind.
+ * #app prefix for specificity to beat #main-content #app button reset - OUTSIDE ul.tree block */
+#app ul.tree button.button-expand svg {
+  background-color: white;
 }
 </style>
