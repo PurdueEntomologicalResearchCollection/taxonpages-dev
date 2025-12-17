@@ -66,6 +66,9 @@
         /* Purdue brand: monochromatic links (black on light, white on dark) with bold */
         color: rgb(var(--color-base-content));
         font-weight: 700;
+        &:hover {
+            text-decoration: underline;
+        }
     }
     /* Remove styles from interactive controls and buttons */
     .leaflet-control a,
