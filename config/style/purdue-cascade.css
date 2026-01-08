@@ -230,6 +230,20 @@
         word-break: break-all;
         overflow-wrap: anywhere;
     }
+    /* Table styling per Purdue web team request */
+    table {
+        td, th {
+            font-size: 0.875rem; /* 14px */
+            color: black;
+            line-height: 1rem;
+        }
+        th {
+            font-weight: 700;
+        }
+        td {
+            font-weight: 400;
+        }
+    }
 }
 
 #main-content #app > div:first-child {
