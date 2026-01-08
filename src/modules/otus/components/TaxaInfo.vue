@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <p class="text-2xl like-a-header capitalize">
-      {{ store.taxon?.rank || 'Combination' }}
-    </p>
-    <h1 class="dark:text-gray-100">
+  <div class="flex flex-col">
+    <h1 class="order-2 dark:text-gray-100">
       <span>
         <span
           :title="store.taxon?.short_status"
@@ -24,9 +21,12 @@
         </span>
       </span>
     </h1>
+    <p class="order-1 text-2xl like-a-header capitalize">
+      {{ store.taxon?.rank || 'Combination' }}
+    </p>
     <h2
       v-if="store.taxonomy.commonNames?.length"
-      class="text-1xl"
+      class="order-3 text-1xl"
     >
       <CommonNames />
     </h2>
