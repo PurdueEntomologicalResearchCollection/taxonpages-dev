@@ -23,7 +23,7 @@ export default () => {
       port: 5175,
       // Use custom HTML for Cascade dev mode
       ...(cascadeMode && {
-        open: '/index-cascade-dev.html'
+        open: '/taxonpages/index-cascade-dev.html'
       })
     },
     define: {
