@@ -4,7 +4,7 @@
     <ClientOnly>
       <span v-html="store.nextAuthor" />
     </ClientOnly>
-    {{ project_citation }}.
+    <span v-html="linkify(project_citation)" />.
     <ClientOnly>
       <span>Retrieved on {{ currentDate }}</span>
     </ClientOnly>
@@ -24,6 +24,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useFooterStore } from '@/store'
+import { linkify } from '@/utils/strings'
 const { project_authors, project_citation, project_url, hash_mode } =
   __APP_ENV__
 

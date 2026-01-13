@@ -1,6 +1,8 @@
 <template>
   <VCard v-if="count">
-    <VCardHeader>Keys ({{ count }})</VCardHeader>
+    <VCardHeader>
+      <h2 class="text-md">Keys ({{ count }})</h2>
+    </VCardHeader>
     <VCardContent>
       <template
         v-for="(group, key) in keys"

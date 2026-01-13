@@ -1,6 +1,6 @@
 <template>
   <Autocomplete
-    class="print:hidden min-w-full mb-2 md:min-w-fit md:ml-2 md:mb-0 md:w-96"
+    class="print:hidden min-w-full mb-2 md:min-w-fit md:m-2 md:ml-0 md:w-96"
     url="/otus/autocomplete"
     query-param="term"
     label="label_html"

@@ -1,12 +1,12 @@
 <template>
-  <div class="tp-footer-copyright flex items-center text-xs gap-2">
+  <div class="tp-footer-copyright flex items-center text-md gap-2">
     <component
       :is="copyright_image_link ? 'a' : 'span'"
       :href="copyright_image_link"
       class="min-w-fit"
+      v-if="copyright_image"
     >
       <img
-        v-if="copyright_image"
         :src="copyright_image"
         alt="copyright"
       />
