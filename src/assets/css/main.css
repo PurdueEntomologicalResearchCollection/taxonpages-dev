@@ -192,6 +192,7 @@
     textarea::placeholder {
         opacity: 1;
         color: #9ca3af;
+        font-size: 16px;
     }
 
     /* Button/role cursor */

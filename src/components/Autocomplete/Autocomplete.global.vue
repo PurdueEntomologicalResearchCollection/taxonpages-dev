@@ -18,7 +18,7 @@
       type="text"
       :autofocus="autofocus"
       autocomplete="off"
-      class="tp-autocomplete__input block box-border min-w-full p-1.5 pl-10 text-base-content rounded border sm:text-sm placeholder:text-sm dark:border-slate-700 border-gray-300 dark:placeholder:text-slate-400 focus:ring-primary-500 focus:border-primary-500"
+      class="tp-autocomplete__input block box-border min-w-full p-1.5 pl-10 h-9 text-base-content rounded border sm:text-sm placeholder:text-sm dark:border-slate-700 border-gray-300 dark:placeholder:text-slate-400 focus:ring-primary-500 focus:border-primary-500"
       :placeholder="placeholder"
       @input="trigger"
     />
