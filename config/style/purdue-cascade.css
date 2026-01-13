@@ -40,23 +40,24 @@
     /* Cascade has some opinions about spacing, color, and size that don't work well for TaxonPages. */
     color: black;
     h1, h2, h3, h4, h5, h6 {
-        font-family: acumin-pro, sans-serif;
+        font-family: acumin-pro-extra-condensed, sans-serif;
         text-transform: unset;
         color: black;
         margin: unset;
         line-height: 1.2;
     }
     h1 {
-        font-size: 2.25rem; /* 36px - more reasonable than Purdue's 48px */
+        font-size: 48px;
     }
     h2 {
-        font-size: 1.3rem;
+        font-size: 36px;
     }
     h3 {
         font-size: 1.2rem;
     }
     .like-a-header {
-        font-family: acumin-pro, sans-serif;
+        font-family: acumin-pro-extra-condensed, sans-serif;
+        font-size: 32px;
         line-height: 1.2;
     }
     li, p {
@@ -77,6 +78,26 @@
     .leaflet-bar a {
         text-decoration: none;
         font-weight: normal;
+    }
+
+    /* Purdue preferred font sizes */
+    .text-sm,.prose {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    /* Table styling per Purdue web team request */
+    table {
+        td, th {
+            font-size: 16px;
+            color: black;
+            line-height: 1rem;
+        }
+        th {
+            font-weight: 700;
+        }
+        td {
+            font-weight: 400;
+        }
     }
 
     /* Override Bootstrap/Cascade spacing utilities to let Tailwind work */
@@ -229,20 +250,6 @@
         /* Ensure citation links break properly even with very long URLs */
         word-break: break-all;
         overflow-wrap: anywhere;
-    }
-    /* Table styling per Purdue web team request */
-    table {
-        td, th {
-            font-size: 0.875rem; /* 14px */
-            color: black;
-            line-height: 1rem;
-        }
-        th {
-            font-weight: 700;
-        }
-        td {
-            font-weight: 400;
-        }
     }
 }
 
