@@ -37,9 +37,9 @@
         height: unset;
         min-height: 30rem;
     }
-    /* Cascade has some opinions about spacing, color, and size that don't work well for TaxonPages. */
+    /* For Ag fonts see: https://ag.purdue.edu/department/agcomm/cascade-user-guide/style-guide/headings-accessibility.html */
     color: black;
-    h1, h2, h3, h4, h5, h6 {
+    h1, h2, h3, h4, h5, h6, .like-a-header {
         font-family: acumin-pro-extra-condensed, sans-serif;
         text-transform: unset;
         color: black;
@@ -51,18 +51,17 @@
         font-size: 48px;
         font-family: acumin-pro, sans-serif;
         text-transform: none;
+        font-weight: 600;
+        line-height: 1.22;
     }
-    h2 {
+    h2, .like-a-header {
         font-size: 36px;
+        font-weight: 500;
     }
     h3 {
-        font-size: 1.2rem;
-    }
-    .like-a-header {
-        font-family: acumin-pro-extra-condensed, sans-serif;
-        font-size: 32px;
-        line-height: 1.2;
-        text-transform: uppercase;
+        font-size: 26.4px;
+        font-family: United Sans, sans-serif;
+        font-weight: 700;
     }
     li, p {
         font-weight: 400;
