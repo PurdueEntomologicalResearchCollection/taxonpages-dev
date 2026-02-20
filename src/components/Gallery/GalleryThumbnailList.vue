@@ -7,7 +7,7 @@
       <GalleryThumbnail
         :image="image"
         :class="{ 'border border-secondary-color': current === index }"
-        :title="image.depictions?.map((d) => d.label).join(';')"
+        :title="image.depictions?.map((d) => d.label).join(';') || ''"
         @click="emit('selectIndex', index)"
       />
     </div>

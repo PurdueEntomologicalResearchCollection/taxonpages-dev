@@ -29,6 +29,7 @@
     </ul>
     <AnimationOpacity>
       <ul
+        v-if="citationList.middle.length"
         class="text-sm"
         v-show="showAll"
       >
@@ -39,7 +40,7 @@
         />
       </ul>
     </AnimationOpacity>
-    <ul class="text-sm">
+    <ul v-if="citationList.last.length" class="text-sm">
       <CitationRow
         v-for="citation in citationList.last"
         :key="citation.label"

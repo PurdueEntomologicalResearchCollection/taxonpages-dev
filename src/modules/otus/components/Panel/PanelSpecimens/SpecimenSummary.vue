@@ -8,11 +8,12 @@ For further reference see https://dwc.tdwg.org/terms/.
   <ul class="specimen-list ml-7 relative list-disc">
     <li class="my-1 last:mb-0" v-if="describeSpecimen(specimen)">{{ describeSpecimen(specimen) }}</li>
     <li class="my-1 last:mb-0" v-if="describeDetails(specimen).length">{{ describeDetails(specimen).join(', ') }}</li>
-    <GalleryImage
-        v-if="images.length"
-        :images="images"
-        :only-thumbs="true"
-    />
+    <li v-if="images.length">
+      <GalleryImage
+          :images="images"
+          :only-thumbs="true"
+      />
+    </li>
     <li v-for="note in notes" :key="note.id" class="my-1 last:mb-0">
       Note: {{ note.text }}
     </li>

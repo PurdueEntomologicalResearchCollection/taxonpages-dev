@@ -1,6 +1,6 @@
 <template>
   <slot v-if="show"></slot>
-  <div v-else></div>
+  <div v-else aria-hidden="true"></div>
 </template>
 
 <script setup>

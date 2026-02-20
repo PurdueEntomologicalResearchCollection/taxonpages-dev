@@ -16,7 +16,9 @@
       <VTable>
         <VTableHeader>
           <VTableHeaderRow>
-            <VTableHeaderCell class="bg-base-foreground" />
+            <VTableHeaderCell class="bg-base-foreground">
+              <span class="sr-only">Rank</span>
+            </VTableHeaderCell>
             <VTableHeaderCell
               v-if="isAdvancedView"
               title="OTUs linked to valid protonyms"
@@ -41,7 +43,9 @@
               v-if="!hideNames"
               colspan="3"
               class="bg-base-foreground"
-            />
+            >
+              <span class="sr-only">Extended name statistics</span>
+            </VTableHeaderCell>
           </VTableHeaderRow>
           <VTableHeaderRow>
             <VTableHeaderCell>Rank</VTableHeaderCell>

@@ -17,6 +17,7 @@
     >
       <img
         :src="item.imageMedium"
+        :alt="item.objectLabel?.replace(/<[^>]*>/g, '') || ''"
         :style="imageStyle"
         class="max-w-full my-0 object-cover w-full"
       />
