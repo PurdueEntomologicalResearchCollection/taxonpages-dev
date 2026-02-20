@@ -1,0 +1,15 @@
+---
+  header_logo_url:
+  header_logo_text: Search PERC
+  header_links:
+    - label: Home
+      link: /
+
+    - label: Bibliography
+      link: /resources/tw/filter/bibliography
+
+    - label: About
+      link: /about
+
+    - label: Source
+      link: https://github.com/PurdueEntomologicalResearchCollection/taxonpages/
