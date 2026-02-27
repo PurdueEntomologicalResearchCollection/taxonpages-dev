@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           ref: 'main'
           fetch-depth: 0
-      
-      - uses: actions/checkout@v2
+
+      - uses: actions/checkout@v4
         with:
           ref: 'setup'
           fetch-depth: 0
@@ -26,12 +26,12 @@ jobs:
         run: cp -r _setup/* .
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: npm-cache
         with:
           path: ~/.npm
@@ -45,7 +45,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2
+        uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: gh-pages
           build_dir: dist
